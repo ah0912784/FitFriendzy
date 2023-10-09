@@ -5,11 +5,34 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { LandingPageComponent } from './landing-page/landing-page.component'
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    // Actual features start here
+    {
+      path: 'landing-page',
+      component: LandingPageComponent,
+    },
+    {
+      path: 'home-page',
+      component: HomePageComponent,
+    },
+    {
+      path: 'groups',
+      loadChildren: () => import('./groups/groups.module')
+        .then(m => m.GroupsModule),
+    },
+    // Actual features end here
+    // Mock features start here
+    {
+      path: 'layout',
+      loadChildren: () => import('./layout/layout.module')
+        .then(m => m.LayoutModule),
+    },
     {
       path: 'dashboard',
       component: ECommerceComponent,
@@ -73,6 +96,7 @@ const routes: Routes = [{
       redirectTo: 'dashboard',
       pathMatch: 'full',
     },
+    // Mock features end here
     {
       path: '**',
       component: NotFoundComponent,
