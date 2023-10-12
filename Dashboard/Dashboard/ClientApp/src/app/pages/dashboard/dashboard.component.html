@@ -1,4 +1,17 @@
 <div class="row">
+  <div class="col-xxl-12">
+    <div *ngIf="!loginDisplay">
+      <p>Please sign-in to see your profile information.</p>
+    </div>
+
+    <div *ngIf="loginDisplay">
+      <p>Login successful!</p>
+      <p>Request your profile information by clicking Profile above.</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-xxxl-3 col-md-6" *ngFor="let statusCard of statusCards">
     <ngx-status-card [title]="statusCard.title" [type]="statusCard.type">
       <i [ngClass]="statusCard.iconClass"></i>
