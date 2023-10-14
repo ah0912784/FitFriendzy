@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
-import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil, filter } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
@@ -56,7 +55,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private themeService: NbThemeService,
-    private userService: UserData,
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
     @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
@@ -76,10 +74,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.setLoginDisplay();
       })
-
-    this.userService.getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()

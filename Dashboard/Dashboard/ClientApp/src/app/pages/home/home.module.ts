@@ -14,14 +14,9 @@ import {
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { HomeComponent } from './home.component';
-import { FormsModule } from '@angular/forms';
-import { NgxEchartsModule } from 'ngx-echarts';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   imports: [
-    FormsModule,
     ThemeModule,
     NbCardModule,
     NbButtonModule,
@@ -31,10 +26,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     NbUserModule,
     NbSelectModule,
     NbListModule,
-    LeafletModule,
     NbSpinnerModule,
-    NgxEchartsModule,
-    NgxChartsModule,
     NbIconModule,
     NbButtonModule,
   ],
