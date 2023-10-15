@@ -10,5 +10,5 @@
 
 export const environment = {
   production: false,
-  domain: 'https://fitfriendzy.azurewebsites.net'
+  domain: 'fitfriendzy.azurewebsites.net'
 };

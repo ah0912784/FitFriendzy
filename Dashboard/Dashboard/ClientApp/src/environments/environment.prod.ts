@@ -5,5 +5,5 @@
  */
 export const environment = {
   production: true,
-  domain: 'https://fitfriendzy.azurewebsites.net'
+  domain: 'fitfriendzy.azurewebsites.net'
 };

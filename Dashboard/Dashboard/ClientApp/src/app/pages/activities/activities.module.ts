@@ -4,6 +4,7 @@ import {
   NbCardModule,
   NbIconModule,
 } from '@nebular/theme';
+import { ActivitiesApi } from '../../@core/backend/common/api/activities.api';
 import { ThemeModule } from '../../@theme/theme.module';
 import { ActivitiesComponent } from './activities.component';
 
@@ -18,6 +19,7 @@ import { ActivitiesComponent } from './activities.component';
     ActivitiesComponent,
   ],
   providers: [
+    // ActivitiesApi
   ],
 })
 export class ActivitiesModule { }

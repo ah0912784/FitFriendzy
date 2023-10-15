@@ -5,17 +5,21 @@
         Activities
       </div>
     </div>
-
   </div>
+</div>
 
+<div class="row">
+  <div class="col">
+    <button nbButton status="primary" (click)="getActivity()" type="button">Get Activity</button>
+  </div>
 </div>
 
 <div class="row">
   <div class="col-xxl-9">
-    AC
+    {{activity?.id}}
   </div>
 
   <div class="col-xxl-3">
-    AC
+    {{activity?.type}}
   </div>
 </div>

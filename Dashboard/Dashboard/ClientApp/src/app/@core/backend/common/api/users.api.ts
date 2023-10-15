@@ -3,12 +3,12 @@ import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 
 @Injectable()
-export class AuthApi {
+export class UsersApi {
+    private readonly apiController: string = 'users';
+
     constructor(private http: HttpService) { }
 
-    authorize(idToken: string): Observable<any> {
-        return this.http.post('auth/ex', null, {
-            headers: { Authorization: 'Bearer ' + idToken }
-        });
+    get(activityId: any): Observable<any> {
+      return this.http.get(`${this.apiController}/get/${activityId}`);
     }
 }
