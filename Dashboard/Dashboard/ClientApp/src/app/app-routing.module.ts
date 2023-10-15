@@ -1,11 +1,11 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { MsalGuard } from '@azure/msal-angular';
+// import { MsalGuard } from '@azure/msal-angular';
 
 export const routes: Routes = [
   {
     path: 'pages',
-    canActivate: [MsalGuard],
+    // canActivate: [MsalGuard],
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
   },
