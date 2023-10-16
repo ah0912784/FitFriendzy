@@ -3,7 +3,11 @@
   "isRoot": true,
   "tools": {
     "dotnet-ef": {
+<<<<<<< HEAD
       "version": "7.0.12",
+=======
+      "version": "7.0.11",
+>>>>>>> 4f2238e (Establishing working branch)
       "commands": [
         "dotnet-ef"
       ]
