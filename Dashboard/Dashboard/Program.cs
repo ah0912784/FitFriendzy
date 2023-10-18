@@ -1,7 +1,7 @@
 /*
 * Copyright (c) Akveo 2019. All Rights Reserved.
 * Licensed under the Single Application / Multi Application License.
-* See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the ‘docs’ folder for license information on type of purchased license.
+* See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the ï¿½docsï¿½ folder for license information on type of purchased license.
 */
 
 using Dashboard;
@@ -50,3 +50,6 @@ app.MapControllers();
 app.MapFallbackToFile("index.html");
 
 app.Run();
+
+// Command ran to generate scaffolding
+// dotnet ef dbcontext scaffold Name=ConnectionStrings:FitFriendzy Microsoft.EntityFrameworkCore.SqlServer -o Models -f
