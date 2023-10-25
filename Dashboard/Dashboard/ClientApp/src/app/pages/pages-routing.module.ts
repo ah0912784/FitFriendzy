@@ -6,6 +6,7 @@ import { NotFoundComponent } from './miscellaneous/not-found/not-found.component
 import { ActivitiesComponent } from './activities/activities.component';
 import { GroupsComponent } from './groups/groups.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [{
   path: '',
@@ -26,6 +27,10 @@ const routes: Routes = [{
     {
       path: 'activities',
       component: ActivitiesComponent,
+    },
+    {
+      path: 'profile',
+      component: ProfileComponent,
     },
     {
       path: '',
