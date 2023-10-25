@@ -1,22 +1,37 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Dashboard.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Dashboard.Controllers
 {
-    [Route("users")]
+    [Route("api/users")]
     public class UsersController : BaseApiController
     {
         // GET: api/<UserController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<User> Get()
         {
-            return new string[] { "value1", "value2" };
+            using (var context = new FitFriendzyDatabaseContext())
+            {
+                var users = context.Users.ToList();
+                return users;
+            }
         }
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public User Get(int id)
         {
-            return "value";
+            using (var context = new FitFriendzyDatabaseContext())
+            {
+                var users = context.Users;
+                if (users.IsNullOrEmpty()) {
+                    return new User();
+                }
+
+                var user = context.Users.Single(user => user.UserId.Equals(id));
+                return user;
+            }
         }
 
         // POST api/<UserController>
