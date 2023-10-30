@@ -1,19 +1,22 @@
 <!-- Basic layout / ideas -->
 
 <h1>
-  Welcome, [User]
+  Welcome, <ngx-home_name></ngx-home_name>
 </h1>
 
 <div class="row">
   <div class="col-md">
     <nb-card size="small">
       <nb-card-header>Point Entry</nb-card-header>
+      <p>Needs work...</p>
     </nb-card>
     <nb-card size="small">
       <nb-card-header>Goal Progress</nb-card-header>
+      <ngx-home_progress></ngx-home_progress>
     </nb-card>
     <nb-card size="small">
       <nb-card-header>Groups</nb-card-header>
+      <ngx-home_groups></ngx-home_groups>
     </nb-card>
   </div>
 
@@ -21,18 +24,20 @@
     <div class="col-md">
       <nb-card size="small">
         <nb-card-header>Activity Feed</nb-card-header>
+        <ngx-home_activity></ngx-home_activity>
       </nb-card>
     </div>
     <div class="col-md">
       <nb-card size="small">
         <nb-card-header>Recomendations</nb-card-header>
+        <p>needs work...</p>
       </nb-card>
     </div>
   </div>
 </div>
 
-<p>Mockup Below here ----------------------------</p>
-
+<!-- <p>Mockup Below here ----------------------------</p> -->
+<!-- 
 <h1>
   Welcome, Jason
 </h1>
@@ -48,7 +53,7 @@
     <nb-card size="small">
       <nb-card-header>Goal Progress</nb-card-header>
       <nb-card-body>
-        Your weekly progress is 50 out of 100 points!
+        Your progress for October is 50 out of 100 points!
         <p></p>
         <nb-progress-bar [value]="50" status="success"></nb-progress-bar>
       </nb-card-body>
@@ -93,4 +98,4 @@
       </nb-card>
     </div>
   </div>
-</div>
+</div> -->
