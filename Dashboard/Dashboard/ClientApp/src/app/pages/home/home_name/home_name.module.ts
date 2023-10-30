@@ -12,12 +12,8 @@ import {
   NbIconModule,
 } from '@nebular/theme';
 
-import { ThemeModule } from '../../@theme/theme.module';
-import { HomeComponent } from './home.component';
-import { HomeGroupComponent } from './home_groups/home_groups.component';
-import { HomeActivityComponent } from './home_activity_feed/home_activity.component';
-import { HomeNameComponent } from './home_name/home_name.component';
-import { HomeProgressComponent } from './home_progress/home_progress.component';
+import { ThemeModule } from '../../../@theme/theme.module';
+import { HomeNameComponent } from './home_name.component';
 
 @NgModule({
   imports: [
@@ -35,11 +31,7 @@ import { HomeProgressComponent } from './home_progress/home_progress.component';
     NbButtonModule,
   ],
   declarations: [
-    HomeComponent,
-    HomeGroupComponent,
-    HomeActivityComponent,
     HomeNameComponent,
-    HomeProgressComponent,
   ],
 })
-export class HomeModule { }
+export class HomeNameModule { }
