@@ -25,4 +25,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'flash-outline',
     link: '/pages/activities',
   },
+  {
+    title: 'Profile',
+    icon: 'person-outline',
+    link: '/pages/profile',
+  },
 ];

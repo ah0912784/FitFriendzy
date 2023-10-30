@@ -9,6 +9,7 @@ import { ActivitiesModule } from './activities/activities.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { PagesRoutingModule } from './pages-routing.module';
   ],
   declarations: [
     PagesComponent,
+    ProfileComponent,
   ],
 })
 export class PagesModule {
