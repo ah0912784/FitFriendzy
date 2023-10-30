@@ -43,6 +43,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 
 app.MapControllers();
