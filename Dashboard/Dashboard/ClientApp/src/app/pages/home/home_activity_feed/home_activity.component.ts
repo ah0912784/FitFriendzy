@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngx-home_activity',
+  selector: 'ngx-home-activity',
   // styleUrls: ['./home_activity.component.scss'],
   template: `
       <nb-list>
