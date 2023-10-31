@@ -64,7 +64,7 @@ import { msalConfig, protectedResources } from './auth-config';
         // If the code needs to call another web API, add the URI mapping here.
         interactionType: InteractionType.Redirect,
         protectedResourceMap: new Map([
-          [protectedResources.userApi.endpoint, protectedResources.userApi.scopes]
+          // [protectedResources.userApi.endpoint, protectedResources.userApi.scopes]
         ])
       })
   ],

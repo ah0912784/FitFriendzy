@@ -1,1 +1,17 @@
 <p>profile works!</p>
+<div *ngFor="let user of users; index as i;">
+  <p>{{user?.userId}}</p>
+  <p>{{user?.userDisplayName}}</p>
+  <p>{{user?.userName}}</p>
+  <p>{{user?.password}}</p>
+  <p>{{user?.firstName}}</p>
+  <p>{{user?.lastName}}</p>
+  <p>{{user?.email}}</p>
+  <p>{{user?.phoneNumber}}</p>
+  <p>{{user?.leaderBoards}}</p>
+  <p>{{user?.userActivities}}</p>
+  <p>{{user?.userGroupMemberships}}</p>
+  <p>{{user?.userSettings}}</p>
+  <div>End of User {{i}}</div>
+  <br />
+</div>

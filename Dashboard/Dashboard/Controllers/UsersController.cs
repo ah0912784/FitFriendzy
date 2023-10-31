@@ -4,12 +4,21 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Dashboard.Controllers
 {
-    [Route("api/users")]
+    [ApiController]
+    [Route("api/[controller]")]
     public class UsersController : BaseApiController
     {
+        private readonly ILogger<UsersController> log;
+
+        public UsersController(ILogger<UsersController> log)
+        {
+            this.log = log;
+        }
+
         // GET: api/<UserController>
         [HttpGet]
-        public List<User> Get()
+        [Route("[action]")]
+        public List<User> GetAll()
         {
             using (var context = new FitFriendzyDatabaseContext())
             {
