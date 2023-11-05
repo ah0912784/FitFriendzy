@@ -10,6 +10,6 @@ import { Component } from '@angular/core';
 
 export class HomeNameComponent {
   // Dummy data until we can properly pull it
-  firstName = "John"
-  lastName = "Doe"
+  firstName = 'John';
+  lastName = 'Doe';
 }

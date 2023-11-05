@@ -11,9 +11,9 @@ export class ActivitiesApi {
 
     constructor(private http: HttpService) { }
 
-    //get(activityId: any): Observable<any> {
-    //  return this.http.get(`${this.apiController}/GetActivity/${activityId}`);
-    //}
+    // get(activityId: any): Observable<any> {
+    //   return this.http.get(`${this.apiController}/GetActivity/${activityId}`);
+    // }
 
   getActivity(activityId: any): Observable<Activity> {
     return this.http.get(`${this.apiController}/getactivity/${activityId}`);

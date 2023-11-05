@@ -43,8 +43,8 @@ export const msalConfig: Configuration = {
 
 export const protectedResources = {
   userApi: {
-    endpoint: "https://fitfriendzy.azurewebsites.net/api/user",
-    scopes: ["https://fitfriendzy.onmicrosoft.com/ff-api/tasks.read"],
+    // endpoint: 'https://fitfriendzy.azurewebsites.net/api/users',
+    scopes: ['https://fitfriendzy.onmicrosoft.com/ff-api/tasks.read'],
   },
 }
 export const loginRequest = {

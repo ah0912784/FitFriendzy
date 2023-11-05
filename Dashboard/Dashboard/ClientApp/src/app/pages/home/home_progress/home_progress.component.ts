@@ -14,9 +14,9 @@ import { Component } from '@angular/core';
 
 export class HomeProgressComponent {
   // Dummy data until we can properly pull it
-  month = "October"
-  points_this_period = 50
-  goal = 100
+  month = "October";
+  points_this_period = 50;
+  goal = 100;
   // Cant seem to pass this for value in nb-progress-bar
-  point_goal_ratio = ((this.points_this_period / this.goal) * 100).toString
+  point_goal_ratio = ((this.points_this_period / this.goal) * 100).toString;
 }
