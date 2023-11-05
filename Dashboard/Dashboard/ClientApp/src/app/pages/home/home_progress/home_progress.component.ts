@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngx-home_progress',
+  selector: 'ngx-home-progress',
   // styleUrls: ['./home_activity.component.scss'],
   template: `
     <nb-card-body>

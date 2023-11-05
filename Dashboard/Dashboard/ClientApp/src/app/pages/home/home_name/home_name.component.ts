@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngx-home_name',
+  selector: 'ngx-home-name',
   // styleUrls: ['./home_activity.component.scss'],
   template: `
       {{firstName}} {{lastName}}

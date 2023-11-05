@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngx-home_groups',
+  selector: 'ngx-home-groups',
   // styleUrls: ['./home_groups.component.scss'],
   template: `
       <nb-list>
