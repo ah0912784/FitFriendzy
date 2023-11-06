@@ -1,7 +1,76 @@
-<p>profile works!</p>
-<div *ngFor="let user of users; index as i;">
-  <p>{{user?.userId}}</p>
-  <p>{{user?.userDisplayName}}</p>
+<nb-layout>
+  <nb-layout-header><h3>{{users[0].firstName}} {{users[0].lastName}}'s Profile</h3></nb-layout-header>
+  <h3>{{users[0].firstName}} {{users[0].lastName}}'s Profile</h3>
+  <nb-layout-column>
+    <!-- Contact Info -->
+    <nb-card size="tiny">
+      <nb-card-header>
+        Contact information
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item>
+          Email: {{users[0].email}}
+         <button nbButton size ="tiny"><nb-icon icon="edit-2-outline"></nb-icon></button>
+        </nb-list-item>
+        <nb-list-item>
+          Phone number: {{users[0].phoneNumber}}
+          <button nbButton size="tiny"><nb-icon icon="edit-2-outline"></nb-icon></button>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+    <!-- Biography Card -->
+   
+    <nb-card>
+      <nb-card-header>
+        Bio
+      </nb-card-header>
+      <nb-card-body>
+        Arma virumque cano. Troiae qui primus ab oris italiam fato.
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+     
+  <!-- Right Column -->
+  <nb-layout-column>
+    <!-- Group Membership card -->
+    <nb-card>
+      <nb-card-header>
+        Group Membership
+        <button nbButton size=".75rem" ><nb-icon icon="plus-outline"></nb-icon></button>
+      </nb-card-header>
+      <nb-card-body>
+        <nb-list>
+          <nb-list-item *ngFor="let group of users[0].userGroupMemberships">
+            {{group}}
+          </nb-list-item>
+
+        </nb-list>
+      </nb-card-body>
+    </nb-card>
+    <nb-card>
+      <nb-card-header>
+        Stats
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item>
+          Workouts Completed: 7
+        </nb-list-item>
+        <nb-list-item>
+          Miles Run: 100
+        </nb-list-item>
+        <nb-list-item>
+          Heaviest Lift:225
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </nb-layout-column>
+
+  <nb-layout-footer></nb-layout-footer>
+
+</nb-layout>
+
+  <!--<p>{{user?.userId}}</p>
+  <p>{{user?.displayName}}</p>
   <p>{{user?.userName}}</p>
   <p>{{user?.password}}</p>
   <p>{{user?.firstName}}</p>
@@ -13,5 +82,4 @@
   <p>{{user?.userGroupMemberships}}</p>
   <p>{{user?.userSettings}}</p>
   <div>End of User {{i}}</div>
-  <br />
-</div>
+  <br />-->
