@@ -27,15 +27,11 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 
 // Import the Azure AD B2C configuration
 import { msalConfig, protectedResources } from './auth-config';
-import { ProfilePicComponent } from './profile-pic/profile-pic.component';
-import { ProfileBioComponent } from './profile-bio/profile-bio.component';
-import { ProfileStatsComponent } from './profile-stats/profile-stats.component';
-import { ProfileGroupsComponent } from './profile-groups/profile-groups.component';
 
 /* Changes end here. */
 
 @NgModule({
-  declarations: [AppComponent, ProfilePicComponent, ProfileBioComponent, ProfileStatsComponent, ProfileGroupsComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -59,8 +55,8 @@ import { ProfileGroupsComponent } from './profile-groups/profile-groups.componen
         // The routing guard configuration.
         interactionType: InteractionType.Redirect,
         authRequest: {
-          scopes: protectedResources.userApi.scopes
-        }
+          scopes: protectedResources.userApi.scopes,
+        },
       },
       {
         // MSAL interceptor configuration.
@@ -69,20 +65,20 @@ import { ProfileGroupsComponent } from './profile-groups/profile-groups.componen
         interactionType: InteractionType.Redirect,
         protectedResourceMap: new Map([
           // [protectedResources.userApi.endpoint, protectedResources.userApi.scopes]
-        ])
-      })
+        ]),
+      }),
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
-      multi: true
+      multi: true,
     },
-    MsalGuard
+    MsalGuard,
   ],
   bootstrap: [
     AppComponent,
-    MsalRedirectComponent
+    MsalRedirectComponent,
   ],
 })
 export class AppModule {

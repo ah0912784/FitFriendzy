@@ -5,39 +5,43 @@
   ],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
-      "parserOptions": {
-        "project": [
-          "e2e/tsconfig.app.json",
-          "e2e/tsconfig.spec.json",
-          "e2e/e2e/tsconfig.json"
-        ],
-        "createDefaultProgram": true
-      },
+      "files": [ "*.component.html" ],
+      "parser": "@angular-eslint/template-parser",
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "style": "camelCase"
-          }
-        ],
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "style": "kebab-case"
-          }
-        ]
-      }
-    },
-    {
-      "files": [
-        "*.html"
-      ],
-      "rules": {}
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/no-implied-eval": "off",
+        "@typescript-eslint/no-throw-literal": "off",
+        "strict": "off",
+        "import/first": "off",
+        "lines-around-directive": "off",
+        "max-lines": "off"
+        "default-case": "off"
+      },
+      "plugins": [ "@angular-eslint/template" ]
     }
-  ]
+  ],
+  "parserOptions": {
+    "project": [
+      "e2e/tsconfig.app.json",
+      "e2e/tsconfig.spec.json",
+      "e2e/tsconfig.json"
+    ],
+    "createDefaultProgram": true
+  },
+  "rules": {
+    "@angular-eslint/directive-selector": [
+      "error",
+      {
+        "type": "attribute",
+        "style": "camelCase"
+      }
+    ],
+    "@angular-eslint/component-selector": [
+      "error",
+      {
+        "type": "element",
+        "style": "kebab-case"
+      }
+    ]
+  }
 }

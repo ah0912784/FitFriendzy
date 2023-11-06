@@ -42,18 +42,13 @@
     <Content Include="ClientApp\tsconfig.json" />
     <Content Include="ClientApp\tslint.json" />
   </ItemGroup>
-
   <ItemGroup>
-<<<<<<< HEAD
     <Folder Include="ClientApp\src\app\%40core\backend\common\services\" />
     <Folder Include="ClientApp\src\assets\images\" />
-=======
     <Content Update="package-lock.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
->>>>>>> 4f2238e (Establishing working branch)
   </ItemGroup>
-
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
