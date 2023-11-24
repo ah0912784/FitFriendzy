@@ -9,7 +9,8 @@ import { ActivitiesModule } from './activities/activities.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
-import { ProfileModule } from './profile/profile.module';
+import { ProfileModule} from './profile/profile.module';
+
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -19,12 +20,12 @@ import { ProfileModule } from './profile/profile.module';
     GroupsModule,
     LeaderboardModule,
     ActivitiesModule,
+    ProfileModule,
     NbMenuModule,
     ProfileModule,
   ],
   declarations: [
     PagesComponent,
-    // ProfileComponent,
   ],
 })
 export class PagesModule {

@@ -1,8 +1,6 @@
-
-<!-- API calls -->
 <nb-layout>
-  <nb-layout-header><h3>{{users[0].firstName}} {{users[0].lastName}}'s Profile</h3></nb-layout-header>
-  <h3>{{users[0].firstName}} {{users[0].lastName}}'s Profile</h3>
+  <nb-layout-header><h3>{{users[0]?.firstName }} {{users[0]?.lastName }}'s Profile</h3></nb-layout-header>
+  <h3>{{users[0]?.firstName}} {{users[0]?.lastName}}'s Profile</h3>
   <nb-layout-column>
     <!-- Contact Info -->
     <nb-card size="tiny">
@@ -11,11 +9,11 @@
       </nb-card-header>
       <nb-list>
         <nb-list-item>
-          Email: {{users[0].email}}
+          Email: {{users[0]?.email}}
          <button nbButton size ="tiny"><nb-icon icon="edit-2-outline"></nb-icon></button>
         </nb-list-item>
         <nb-list-item>
-          Phone number: {{users[0].phoneNumber}}
+          Phone number: {{users[0]?.phoneNumber}}
           <button nbButton size="tiny"><nb-icon icon="edit-2-outline"></nb-icon></button>
         </nb-list-item>
       </nb-list>
@@ -42,7 +40,7 @@
       </nb-card-header>
       <nb-card-body>
         <nb-list>
-          <nb-list-item *ngFor="let group of users[0].userGroupMemberships">
+          <nb-list-item *ngFor="let group of users[0]?.userGroupMemberships">
             {{group}}
           </nb-list-item>
 
@@ -85,5 +83,3 @@
   <p>{{user?.userSettings}}</p>
   <div>End of User {{i}}</div>
   <br />-->
-
-

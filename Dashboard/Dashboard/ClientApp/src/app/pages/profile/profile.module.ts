@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import {
   NbUserModule,
   NbButtonModule,
@@ -14,6 +15,7 @@ import { ProfileComponent } from './profile.component';
 
 @NgModule({
   imports: [
+    AsyncPipe,
     NbUserModule,
     NbButtonModule,
     NbCardModule,
