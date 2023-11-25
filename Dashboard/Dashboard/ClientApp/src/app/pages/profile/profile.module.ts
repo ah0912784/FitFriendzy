@@ -1,19 +1,29 @@
 import { NgModule } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import {
+  NbUserModule,
   NbButtonModule,
   NbCardModule,
+  NbListModule,
+  NbLayoutModule,
+  NbActionsModule,
   NbIconModule,
 } from '@nebular/theme';
-import { UsersApi } from '../../@core/backend/common/api/users.api';
 import { ThemeModule } from '../../@theme/theme.module';
+import { UsersApi } from '../../@core/backend/common/api/users.api';
 import { ProfileComponent } from './profile.component';
 
 @NgModule({
   imports: [
-    ThemeModule,
-    NbCardModule,
+    AsyncPipe,
+    NbUserModule,
     NbButtonModule,
+    NbCardModule,
     NbIconModule,
+    NbListModule,
+    NbLayoutModule,
+    ThemeModule,
+    NbActionsModule,
   ],
   declarations: [
     ProfileComponent,
