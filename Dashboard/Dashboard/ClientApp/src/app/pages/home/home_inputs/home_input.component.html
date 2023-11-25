@@ -1,0 +1,31 @@
+<div class="home-input">
+    <form [formGroup]="inputForm" (ngSubmit)="onSubmit()">
+        <nb-card>
+            <nb-card-body>
+                <!-- Activity -->
+                <input #autoInput nbInput type="text" (input)="onChange()" placeholder="Select Activity"
+                    [nbAutocomplete]="auto" />
+                <nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
+                    <nb-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+                        {{ option }}
+                    </nb-option>
+                </nb-autocomplete>
+                - Activity
+                <br>
+
+                <!-- Duration -->
+                <input type="number" id="duration" placeholder="Enter Time (Minutes)" formControlName="duration" nbInput
+                    fullWidth>
+                - Duration (Minutes)
+                <br>
+
+                <!-- Points -->
+                <input type="number" id="points" formControlName="points" nbInput fullWidth>
+                - Points
+                <div class="mt-3">
+                    <button nbButton status="primary" type="submit">Submit</button>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </form>
+</div>
