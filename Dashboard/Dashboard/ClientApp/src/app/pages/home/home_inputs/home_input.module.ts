@@ -11,12 +11,9 @@ import {
   NbCardModule,
   NbIconModule,
 } from '@nebular/theme';
-
-import { ReactiveFormsModule } from '@angular/forms';
-import { ThemeModule } from '../../@theme/theme.module';
-import { GroupsComponent } from './groups.component';
-import { GroupsCreateComponent } from './groups_create/groups_create.component';
-import { GroupsViewComponent } from './groups_view/groups_view.component';
+import { NbAutocompleteModule } from '@nebular/theme';
+import { ThemeModule } from '../../../@theme/theme.module';
+import { HomeInputComponent } from './home_input.component';
 
 @NgModule({
   imports: [
@@ -24,6 +21,7 @@ import { GroupsViewComponent } from './groups_view/groups_view.component';
     NbCardModule,
     NbButtonModule,
     NbActionsModule,
+    NbAutocompleteModule,
     NbProgressBarModule,
     NbTabsetModule,
     NbUserModule,
@@ -32,12 +30,9 @@ import { GroupsViewComponent } from './groups_view/groups_view.component';
     NbSpinnerModule,
     NbIconModule,
     NbButtonModule,
-    ReactiveFormsModule,
   ],
   declarations: [
-    GroupsComponent,
-    GroupsCreateComponent,
-    GroupsViewComponent,
+    HomeInputComponent,
   ],
 })
-export class GroupsModule { }
+export class HomeInputModule { }

@@ -9,8 +9,10 @@ import { ActivitiesModule } from './activities/activities.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
-import { ProfileModule} from './profile/profile.module';
+import { ProfileModule } from './profile/profile.module';
+import { NbAutocompleteModule } from '@nebular/theme';
 import { UsersModule } from './users/users.module';
+
 
 @NgModule({
   imports: [
@@ -24,6 +26,7 @@ import { UsersModule } from './users/users.module';
     ProfileModule,
     UsersModule,
     NbMenuModule,
+    NbAutocompleteModule,
   ],
   declarations: [
     PagesComponent,
