@@ -26,11 +26,7 @@ import { UsersModule } from './users/users.module';
     ProfileModule,
     UsersModule,
     NbMenuModule,
-<<<<<<< HEAD
-    ProfileModule,
-=======
     NbAutocompleteModule,
->>>>>>> main
   ],
   declarations: [
     PagesComponent,

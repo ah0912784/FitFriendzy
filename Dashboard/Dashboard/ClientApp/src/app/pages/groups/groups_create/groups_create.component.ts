@@ -27,6 +27,7 @@ export class GroupsCreateComponent {
         console.log(`Group Name: ${groupName}`);
         // Should instead do a db push
       } else {
+// tslint:disable-next-line:quotemark
         console.log("Please enter a valid group name.");
       }
     }
@@ -35,8 +36,8 @@ export class GroupsCreateComponent {
   validateSubmission(name) {
     //if name length less than 5 or creater than 25, fail
     if (name.length < 5 || name.length > 25) {
-      console.log("Length not between 5-25")
-      return 0
+      console.log("Length not between 5-25");
+      return 0;
     }
     // ^ adjust as needed, I am unsure of current db schema
 
@@ -46,7 +47,7 @@ export class GroupsCreateComponent {
     //any other testing needed, fail negatives
 
     // else, pass
-    return 1
+    return 1;
   }
 
 }

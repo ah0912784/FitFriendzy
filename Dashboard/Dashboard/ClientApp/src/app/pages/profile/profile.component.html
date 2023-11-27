@@ -19,20 +19,10 @@
       </nb-list>
     </nb-card>
     <!-- Biography Card -->
-   
-    <nb-card>
-      <nb-card-header>
-        {{users?.firstName}}'s Bio
-      </nb-card-header>
-     
-      <nb-card-body>
-        <nb-form-field>
-          <nb-icon nbPrefix icon="edit-2-outline"></nb-icon>
-          <input type="text" nbInput>
-        </nb-form-field>
-       
-      </nb-card-body>
-    </nb-card>
+   <ProfileBioComponent [name] = {{ users.displayName }}>
+
+   </ProfileBioComponent>
+    
   </nb-layout-column>
      
   <!-- Right Column -->
