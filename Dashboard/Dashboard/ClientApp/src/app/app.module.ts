@@ -50,35 +50,35 @@ import { msalConfig, protectedResources } from './auth-config';
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     // Initiate the MSAL library with the MSAL configuration object
-    MsalModule.forRoot(new PublicClientApplication(msalConfig),
-      {
-        // The routing guard configuration.
-        interactionType: InteractionType.Redirect,
-        authRequest: {
-          scopes: protectedResources.userApi.scopes
-        }
-      },
-      {
-        // MSAL interceptor configuration.
-        // The protected resource mapping maps the web API with the corresponding app scopes.
-        // If the code needs to call another web API, add the URI mapping here.
-        interactionType: InteractionType.Redirect,
-        protectedResourceMap: new Map([
-          // [protectedResources.userApi.endpoint, protectedResources.userApi.scopes]
-        ])
-      })
+    // MsalModule.forRoot(new PublicClientApplication(msalConfig),
+    //  {
+    //    // The routing guard configuration.
+    //    interactionType: InteractionType.Redirect,
+    //    authRequest: {
+    //      scopes: protectedResources.userApi.scopes
+    //    }
+    //  },
+    //  {
+    //    // MSAL interceptor configuration.
+    //    // The protected resource mapping maps the web API with the corresponding app scopes.
+    //    // If the code needs to call another web API, add the URI mapping here.
+    //    interactionType: InteractionType.Redirect,
+    //    protectedResourceMap: new Map([
+    //      // [protectedResources.userApi.endpoint, protectedResources.userApi.scopes]
+    //    ])
+    //  })
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: MsalInterceptor,
-      multi: true
-    },
-    MsalGuard
+    // {
+    //  provide: HTTP_INTERCEPTORS,
+    //  useClass: MsalInterceptor,
+    //  multi: true
+    // },
+    // MsalGuard
   ],
   bootstrap: [
     AppComponent,
-    MsalRedirectComponent
+    // MsalRedirectComponent
   ],
 })
 export class AppModule {

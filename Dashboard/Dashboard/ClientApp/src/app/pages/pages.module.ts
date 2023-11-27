@@ -10,6 +10,7 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ProfileModule} from './profile/profile.module';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { ProfileModule} from './profile/profile.module';
     LeaderboardModule,
     ActivitiesModule,
     ProfileModule,
+    UsersModule,
     NbMenuModule,
   ],
   declarations: [

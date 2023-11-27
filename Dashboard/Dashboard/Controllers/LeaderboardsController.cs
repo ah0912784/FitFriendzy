@@ -1,5 +1,6 @@
 ﻿using Dashboard.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 // TODO: Leaderboard needs a group ID?
 
@@ -14,7 +15,7 @@ namespace Dashboard.Controllers
         {
             using (var context = new FitFriendzyDatabaseContext())
             {
-                var leaderboards = context.Leaderboard.ToList();
+                var leaderboards = context.Leaderboards.ToList();
                 return leaderboards;
             }
         }
@@ -25,8 +26,8 @@ namespace Dashboard.Controllers
         {
             using (var context = new FitFriendzyDatabaseContext())
             {
-                var leaderboards = context.Leaderboard;
-                if leaderboards.IsNullOrEmpty() {
+                var leaderboards = context.Leaderboards;
+                if (leaderboards.IsNullOrEmpty()) {
                     return new Leaderboard();
                 }
 
@@ -46,8 +47,8 @@ namespace Dashboard.Controllers
         {
             using (var context = new FitFriendzyDatabaseContext())
             {
-                var leaderboards = context.Leaderboard;
-                if leaderboards.IsNullOrEmpty() {
+                var leaderboards = context.Leaderboards;
+                if (leaderboards.IsNullOrEmpty()) {
                     return new Leaderboard();
                 }
 
@@ -76,7 +77,7 @@ namespace Dashboard.Controllers
                 {
                     int leaderboardCount = leaderboards.Count;
 
-                    context.Leaderboard.AddRange(leaderboards);
+                    context.Leaderboards.AddRange(leaderboards);
                     context.SaveChanges();
                     return Ok(String.Format("Created {0} leaderboards successfully.", leaderboardCount));
                 }
@@ -94,7 +95,7 @@ namespace Dashboard.Controllers
             using (var context = new FitFriendzyDatabaseContext())
             {
                 try {
-                    var existingLeaderboard = context.Leaderboard.Find(leaderboardGuid);
+                    var existingLeaderboard = context.Leaderboards.Find(leaderboardGuid);
 
                     if (existingLeaderboard == null) {
                         return BadRequest("Failed to find existing leaderboard with GUID: " + leaderboardGuid);
@@ -121,13 +122,13 @@ namespace Dashboard.Controllers
             {
                 try
                 {
-                    User existingLeaderboard = context.Leaderboard.Find(id);
+                    Leaderboard existingLeaderboard = context.Leaderboards.Find(leaderboardGuid);
 
                     if (existingLeaderboard == null) {
                         return BadRequest("Failed to find existing leaderboard with GUID: " + leaderboardGuid);
                     }
 
-                    context.Leaderboard.Remove(existingLeaderboard);
+                    context.Leaderboards.Remove(existingLeaderboard);
                     await context.SaveChangesAsync();
 
                     return Ok(new {success = "Deleted leaderboard: " + leaderboardGuid});
