@@ -46,8 +46,8 @@ export class UsersComponent implements OnInit, OnDestroy {
     const user: UserDto = this.convertToUser(this.newUser);
     this.service.createNew(user)
       .pipe(takeUntil(this.destroying$))
-      .subscribe((user: UserDto) => {
-        this.handleSuccessResponse(user, 'success');
+      .subscribe((u) => {
+        this.handleSuccessResponse('success');
       },
       err => {
         this.handleWrongResponse(err);
@@ -84,13 +84,13 @@ export class UsersComponent implements OnInit, OnDestroy {
       firstName: "",
       lastName: "",
       email: "",
-      phoneNumber: "1234567890"
+      phoneNumber: ""
     }
   }
 
-  handleSuccessResponse(user: UserDto, status: NbComponentStatus) {
+  handleSuccessResponse(status: NbComponentStatus) {
     this.newUserModel();
-    this.toastrService.success(status, `Successfully added ${user.userName}`);
+    this.toastrService.success(status, `Successfully added new user!`);
   }
 
   handleWrongResponse(err: any) {
