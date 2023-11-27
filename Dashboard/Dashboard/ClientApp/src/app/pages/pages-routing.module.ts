@@ -7,6 +7,7 @@ import { ActivitiesComponent } from './activities/activities.component';
 import { GroupsComponent } from './groups/groups.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [{
   path: '',
@@ -31,6 +32,10 @@ const routes: Routes = [{
     {
       path: 'profile',
       component: ProfileComponent,
+    },
+    {
+      path: 'users',
+      component: UsersComponent,
     },
     {
       path: '',
