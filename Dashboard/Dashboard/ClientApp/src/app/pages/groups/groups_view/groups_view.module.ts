@@ -12,11 +12,8 @@ import {
   NbIconModule,
 } from '@nebular/theme';
 
-import { ReactiveFormsModule } from '@angular/forms';
-import { ThemeModule } from '../../@theme/theme.module';
-import { GroupsComponent } from './groups.component';
-import { GroupsCreateComponent } from './groups_create/groups_create.component';
-import { GroupsViewComponent } from './groups_view/groups_view.component';
+import { ThemeModule } from '../../../@theme/theme.module';
+import { GroupsViewComponent } from './groups_view.component';
 
 @NgModule({
   imports: [
@@ -32,11 +29,8 @@ import { GroupsViewComponent } from './groups_view/groups_view.component';
     NbSpinnerModule,
     NbIconModule,
     NbButtonModule,
-    ReactiveFormsModule,
   ],
   declarations: [
-    GroupsComponent,
-    GroupsCreateComponent,
     GroupsViewComponent,
   ],
 })

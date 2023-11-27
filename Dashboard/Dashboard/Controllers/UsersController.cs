@@ -1,12 +1,16 @@
 ﻿using Dashboard.Models;
+using Dashboard.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using System.Web.Http.Results;
 
 namespace Dashboard.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : BaseApiController
+    public class UsersController : ControllerBase
     {
         private readonly ILogger<UsersController> log;
 
@@ -18,59 +22,92 @@ namespace Dashboard.Controllers
         // GET: api/<UserController>
         [HttpGet]
         [Route("[action]")]
-        public List<User> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             using (var context = new FitFriendzyDatabaseContext())
             {
-                var users = context.Users.ToList();
-                return users;
+                try
+                {
+                    var entities = await context.Users.ToListAsync();
+                    var users = ConvertToDtoList(entities);
+                    return Ok(users);
+                } catch(Exception e)
+                {
+                    return BadRequest("Failed to get users: " + e);
+                }
             }
+        }
+
+        public List<UserDto> ConvertToDtoList(List<User> users)
+        {
+            // Map User objects to UserDto objects
+            List<UserDto> userDtos = users
+                .Select(u => new UserDto
+                {
+                    UserId = u.UserId,
+                    UserDisplayName = u.UserDisplayName,
+                    UserName = u.UserName,
+                    Password = u.Password,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Email = u.Email,
+                    PhoneNumber = Convert.ToString(u.PhoneNumber)
+                })
+                .ToList();
+
+            return userDtos;
         }
 
         // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public User Get(Guid id)
-        {
-            using (var context = new FitFriendzyDatabaseContext())
-            {
-                var users = context.Users;
-                if (users.IsNullOrEmpty()) {
-                    return new User();
-                }
+        //[HttpGet("{id}")]
+        //public User Get(Guid id)
+        //{
+        //    using (var context = new FitFriendzyDatabaseContext())
+        //    {
+        //        var users = context.Users;
+        //        if (users.IsNullOrEmpty()) {
+        //            return new User();
+        //        }
 
-                var user = context.Users.Find(id);
+        //        var user = context.Users.Find(id);
                 
-                if (user == null) {
-                    return null;
-                }
+        //        if (user == null) {
+        //            return null;
+        //        }
 
-                return user;
-            }
-        }
+        //        return user;
+        //    }
+        //}
 
         // POST api/<UserController>
         [HttpPost]
-        public IActionResult Post([FromBody] List<User> users)
+        [Route("[action]")]
+        public async Task<IActionResult> CreateNewUser(UserDto newUser)
         {
-            if (users == null || !users.Any())
+            if (newUser == null)
             {
-                return BadRequest("No users provided");
+                return BadRequest("No user info provided");
             }
 
             using (var context = new FitFriendzyDatabaseContext())
             {
                 try
                 {
-                    int userCount = users.Count;
-
-                    context.Users.AddRange(users);
-                    context.SaveChanges();
-                    return Ok(String.Format("Created {0} users successfully.", userCount));
+                    var user = newUser.ToPersisted();
+                    user.UserId = Guid.NewGuid();
+                    await context.Users.AddAsync(user);
+                    var created = await context.SaveChangesAsync();
+                    if( created > 0 )
+                    {
+                        return Ok();
+                    }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    return BadRequest("Failed to create users");
+                    return BadRequest($"Failed to create user: {ex}");
                 }
+
+                return BadRequest("Error");
             }
         }
 

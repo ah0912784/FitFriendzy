@@ -11,17 +11,20 @@ import {
   NbCardModule,
   NbIconModule,
 } from '@nebular/theme';
-
+import { NbAutocompleteModule } from '@nebular/theme';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ThemeModule } from '../../@theme/theme.module';
 import { HomeComponent } from './home.component';
 import { HomeGroupComponent } from './home_groups/home_groups.component';
 import { HomeActivityComponent } from './home_activity_feed/home_activity.component';
 import { HomeNameComponent } from './home_name/home_name.component';
 import { HomeProgressComponent } from './home_progress/home_progress.component';
+import { HomeInputComponent } from './home_inputs/home_input.component';
 
 @NgModule({
   imports: [
     ThemeModule,
+    NbAutocompleteModule,
     NbCardModule,
     NbButtonModule,
     NbActionsModule,
@@ -33,6 +36,7 @@ import { HomeProgressComponent } from './home_progress/home_progress.component';
     NbSpinnerModule,
     NbIconModule,
     NbButtonModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     HomeComponent,
@@ -40,6 +44,7 @@ import { HomeProgressComponent } from './home_progress/home_progress.component';
     HomeActivityComponent,
     HomeNameComponent,
     HomeProgressComponent,
+    HomeInputComponent,
   ],
 })
 export class HomeModule { }
