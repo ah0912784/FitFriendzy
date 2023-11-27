@@ -11,6 +11,8 @@ import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ProfileModule } from './profile/profile.module';
 import { NbAutocompleteModule } from '@nebular/theme';
+import { UsersModule } from './users/users.module';
+
 
 @NgModule({
   imports: [
@@ -22,6 +24,7 @@ import { NbAutocompleteModule } from '@nebular/theme';
     LeaderboardModule,
     ActivitiesModule,
     ProfileModule,
+    UsersModule,
     NbMenuModule,
     NbAutocompleteModule,
   ],

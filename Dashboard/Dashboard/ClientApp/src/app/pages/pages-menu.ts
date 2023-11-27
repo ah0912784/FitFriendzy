@@ -30,4 +30,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'person-outline',
     link: '/pages/profile',
   },
+  {
+    title: 'ADMIN',
+    group: true,
+  },
+  {
+    title: 'Users',
+    icon: 'people-outline',
+    link: '/pages/users',
+  },
 ];

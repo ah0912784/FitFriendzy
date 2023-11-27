@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private readonly destroy$: Subject<void> = new Subject<void>();
 
-  loginDisplay = false;
+  // loginDisplay = false;
   userPictureOnly: boolean = false;
   user: any;
 
@@ -57,23 +57,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private themeService: NbThemeService,
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
-    @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
-    private broadcastService: MsalBroadcastService,
-    private authService: MsalService
+    // @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
+    // private broadcastService: MsalBroadcastService,
+    // private authService: MsalService
   ) {
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
 
-    this.broadcastService.inProgress$
-      .pipe(
-        filter((status: InteractionStatus) => status === InteractionStatus.None),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.setLoginDisplay();
-      })
+    // this.broadcastService.inProgress$
+    //  .pipe(
+    //    filter((status: InteractionStatus) => status === InteractionStatus.None),
+    //    takeUntil(this.destroy$)
+    //  )
+    //  .subscribe(() => {
+    //    this.setLoginDisplay();
+    //  })
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
@@ -96,23 +96,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  login() {
-    if (this.msalGuardConfig.authRequest) {
-      this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest);
-    } else {
-      this.authService.loginRedirect();
-    }
-  }
+  //login() {
+  //  if (this.msalGuardConfig.authRequest) {
+  //    this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest);
+  //  } else {
+  //    this.authService.loginRedirect();
+  //  }
+  //}
 
-  logout() {
-    this.authService.logoutRedirect({
-      postLogoutRedirectUri: 'https://fitfriendzy.azurewebsites.net/logout'
-    });
-  }
+  //logout() {
+  //  this.authService.logoutRedirect({
+  //    postLogoutRedirectUri: 'https://fitfriendzy.azurewebsites.net/logout'
+  //  });
+  //}
 
-  setLoginDisplay() {
-    this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
-  }
+  //setLoginDisplay() {
+  //  this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
+  //}
 
   changeTheme(themeName: string) {
     this.themeService.changeTheme(themeName);
