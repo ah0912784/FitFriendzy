@@ -10,6 +10,7 @@ import {
   NbButtonModule,
   NbCardModule,
   NbIconModule,
+  NbInputModule
 } from '@nebular/theme';
 import { NbAutocompleteModule } from '@nebular/theme';
 import { ThemeModule } from '../../../@theme/theme.module';
@@ -30,6 +31,7 @@ import { HomeInputComponent } from './home_input.component';
     NbSpinnerModule,
     NbIconModule,
     NbButtonModule,
+    NbInputModule
   ],
   declarations: [
     HomeInputComponent,

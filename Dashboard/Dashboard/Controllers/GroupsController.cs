@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Dashboard.Models;
+using Dashboard.Models.DTO;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Dashboard.Controllers
 {
@@ -20,10 +22,39 @@ namespace Dashboard.Controllers
             return "value";
         }
 
-        // POST api/<UserController>
+        // POST api/<UserController>/<action>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("create/new")]
+        public async Task<IActionResult> CreateNewGroup(GroupDto newGroup)
         {
+            if (newGroup == null)
+            {
+                return BadRequest("No group info provided");
+            }
+
+            using (var context = new FitFriendzyDatabaseContext())
+            {
+                try
+                {
+                    var group = newGroup.ToPersisted();
+                    await context.Groups.AddAsync(group);
+
+                    var groupMembership = group.ToNewGroupMembership();
+                    await context.UserGroupMemberships.AddAsync(groupMembership);
+
+                    var created = await context.SaveChangesAsync();
+                    if (created > 0)
+                    {
+                        return Ok();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Failed to create group: {ex}");
+                }
+
+                return BadRequest("Error");
+            }
         }
 
         // PUT api/<UserController>/5

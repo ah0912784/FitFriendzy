@@ -4,7 +4,7 @@ import {
   NbSortDirection, NbSortRequest,
   NbToastrService, NbTreeGridDataSource, NbTreeGridDataSourceBuilder
 } from '@nebular/theme';
-import { User, UserDto } from '../../@core/interfaces/common/user';
+import { User } from '../../@core/interfaces/common/user';
 import { UsersApi } from '../../@core/backend/common/api/users.api';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   submitted = false;
 
-  newUser: UserDto;
+  newUser: User;
 
   ngOnInit(): void {
     this.newUserModel();
@@ -43,7 +43,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.submitted = true;
     console.log(this.newUser);
 
-    const user: UserDto = this.convertToUser(this.newUser);
+    const user: User = this.convertToUser(this.newUser);
     this.service.createNew(user)
       .pipe(takeUntil(this.destroying$))
       .subscribe((u) => {
@@ -54,14 +54,14 @@ export class UsersComponent implements OnInit, OnDestroy {
       });
   }
 
-  convertToUser(value: any): UserDto {
+  convertToUser(value: any): User {
     const entity = this.getPersistedModel(value);
 
     return entity;
   }
 
-  getPersistedModel(value: any): UserDto {
-    let retval: UserDto = {
+  getPersistedModel(value: any): User {
+    let retval: User = {
       userId: value.userId ? value.userId : null,
       firstName: value.firstName ? value.firstName : "",
       lastName:  value.lastName ? value.lastName : "",
@@ -124,7 +124,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     return NbSortDirection.NONE;
   }
 
-  private data: TreeNode<UserDto>[] = [
+  private data: TreeNode<User>[] = [
     {
       data: {
         userId: "000-00000-00001",

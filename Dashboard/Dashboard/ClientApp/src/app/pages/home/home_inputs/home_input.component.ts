@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 })
 
 
-// KNOWN ISSUES: 
+// KNOWN ISSUES:
 // Currently, the points update one 'event' behind real time
 // For example, if you enter 'running' and '3' for the duration, the result will be for 0
 // Then, if you enter '5' for the duration, the result will be for a duration of '3'

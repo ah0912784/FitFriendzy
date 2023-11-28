@@ -10,10 +10,14 @@ import {
   NbButtonModule,
   NbCardModule,
   NbIconModule,
+  NbInputModule,
+  NbFormFieldModule,
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../../@theme/theme.module';
-import { GroupsCreateComponent } from './groups_create.component';
+import { CreateGroupComponent } from './create-group.component';
+import { GroupsApi } from '../../../@core/backend/common/api/groups.api';
+import { UsersApi } from '../../../@core/backend/common/api/users.api';
 
 @NgModule({
   imports: [
@@ -29,9 +33,15 @@ import { GroupsCreateComponent } from './groups_create.component';
     NbSpinnerModule,
     NbIconModule,
     NbButtonModule,
+    NbInputModule,
+    NbFormFieldModule,
   ],
   declarations: [
-    GroupsCreateComponent,
+    CreateGroupComponent,
   ],
+  providers: [
+    GroupsApi,
+    UsersApi
+  ]
 })
-export class GroupsCreateModule { }
+export class CreateGroupModule { }

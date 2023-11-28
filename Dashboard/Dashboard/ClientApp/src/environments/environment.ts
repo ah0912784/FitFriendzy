@@ -10,5 +10,6 @@
 
 export const environment = {
   production: false,
-  domain: 'fitfriendzy.azurewebsites.net'
+  domain: 'fitfriendzy.azurewebsites.net',
+  defaultUserId: 'a6a16dbb-83e4-493d-8267-0b94b991d8eb'
 };

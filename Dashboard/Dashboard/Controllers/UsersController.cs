@@ -21,7 +21,7 @@ namespace Dashboard.Controllers
 
         // GET: api/<UserController>
         [HttpGet]
-        [Route("[action]")]
+        [Route("get/all")]
         public async Task<IActionResult> GetAll()
         {
             using (var context = new FitFriendzyDatabaseContext())
@@ -59,29 +59,32 @@ namespace Dashboard.Controllers
         }
 
         // GET api/<UserController>/5
-        //[HttpGet("{id}")]
-        //public User Get(Guid id)
-        //{
-        //    using (var context = new FitFriendzyDatabaseContext())
-        //    {
-        //        var users = context.Users;
-        //        if (users.IsNullOrEmpty()) {
-        //            return new User();
-        //        }
+        [HttpGet]
+        [Route("get/{id}")]
+        public User GetUser(Guid id)
+        {
+            using (var context = new FitFriendzyDatabaseContext())
+            {
+                var users = context.Users;
+                if (users.IsNullOrEmpty())
+                {
+                    return new User();
+                }
 
-        //        var user = context.Users.Find(id);
-                
-        //        if (user == null) {
-        //            return null;
-        //        }
+                var user = context.Users.Find(id);
 
-        //        return user;
-        //    }
-        //}
+                if (user == null)
+                {
+                    return null;
+                }
+
+                return user;
+            }
+        }
 
         // POST api/<UserController>
         [HttpPost]
-        [Route("[action]")]
+        [Route("/create/new")]
         public async Task<IActionResult> CreateNewUser(UserDto newUser)
         {
             if (newUser == null)

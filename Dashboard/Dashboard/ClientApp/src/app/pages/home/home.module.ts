@@ -10,6 +10,7 @@ import {
   NbButtonModule,
   NbCardModule,
   NbIconModule,
+  NbInputModule
 } from '@nebular/theme';
 import { NbAutocompleteModule } from '@nebular/theme';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -37,6 +38,7 @@ import { HomeInputComponent } from './home_inputs/home_input.component';
     NbIconModule,
     NbButtonModule,
     ReactiveFormsModule,
+    NbInputModule
   ],
   declarations: [
     HomeComponent,
