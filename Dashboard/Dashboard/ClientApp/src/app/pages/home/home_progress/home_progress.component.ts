@@ -5,11 +5,19 @@ import { Component } from '@angular/core';
   // styleUrls: ['./home_activity.component.scss'],
   template: `
     <nb-card-body>
-      Your progress for {{month}} is {{points_this_period}} out of {{goal}} points!
-      <p></p>
+        <p>
+          Your progress for {{month}} is {{points_this_period}} out of {{goal}} points!
+        </p>
+
         <nb-progress-bar [value]="50" status="success"></nb-progress-bar>
     </nb-card-body>
   `,
+  styles: [`
+    * {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  `]
 })
 
 export class HomeProgressComponent {
