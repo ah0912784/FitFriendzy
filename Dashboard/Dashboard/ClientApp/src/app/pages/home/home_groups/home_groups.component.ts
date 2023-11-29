@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'ngx-home-groups',
-  // styleUrls: ['./home_groups.component.scss'],
   template: `
       <nb-list>
         <nb-list-item *ngFor="let group of groups">
@@ -11,7 +10,14 @@ import { Component } from '@angular/core';
         </nb-list-item>
       </nb-list>
   `,
+  styles: [`
+    button {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  `]
 })
+
 
 export class HomeGroupComponent {
   // Dummy data until we can properly pull it
