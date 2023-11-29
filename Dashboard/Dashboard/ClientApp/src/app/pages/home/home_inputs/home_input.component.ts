@@ -11,6 +11,9 @@ import { map } from 'rxjs/operators';
       margin-left: 10px;
       margin-right: 10px;
     }
+    .home-input {
+      padding: 10px;
+    }
   `]
 })
 
