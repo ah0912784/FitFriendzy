@@ -3,8 +3,6 @@ using Dashboard.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using System.Web.Http.Results;
 
 namespace Dashboard.Controllers
 {
