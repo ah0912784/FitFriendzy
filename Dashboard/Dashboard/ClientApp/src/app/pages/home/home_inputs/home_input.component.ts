@@ -6,6 +6,12 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'ngx-home-input',
   templateUrl: './home_input.component.html',
+  styles: [`
+    .form-group input {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  `]
 })
 
 
