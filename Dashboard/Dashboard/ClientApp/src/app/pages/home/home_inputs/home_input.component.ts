@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewChild, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -25,7 +25,8 @@ import { map } from 'rxjs/operators';
 // Could not find changes to update in real time, but now when you submit there will be a final update
 // This means the ui may not be accurate until after you hit submit.
 
-export class HomeInputComponent implements OnInit {
+export class HomeInputComponent implements OnInit, OnDestroy {
+  protected readonly destroying$ = new Subject<void>();
 
   options: string[];
   points: { [key: string]: number };
@@ -47,7 +48,7 @@ export class HomeInputComponent implements OnInit {
     this.inputForm = this.fb.group({
       activity: ['', Validators.required],
       duration: [0, [Validators.required, Validators.min(0)]],
-      points: [{ value: 0 }] //, disabled: true
+      points: [{ value: 0 }] // , disabled: true
     });
 
     // Update to changes in the duration
@@ -109,5 +110,9 @@ export class HomeInputComponent implements OnInit {
     } else {
       console.log("Please select an activity and provide a duration.");
     }
+  }
+  ngOnDestroy(): void {
+    this.destroying$.next();
+    this.destroying$.complete();
   }
 }

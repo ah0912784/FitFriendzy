@@ -1,4 +1,7 @@
-<nb-card>
+<nb-card accent="info" [nbSpinner]="loading"
+             nbSpinnerStatus="info"
+             nbSpinnerSize="large"
+             nbSpinnerMessage="">
   <nb-card-header>Welcome to {{group?.groupName}}!</nb-card-header>
   <nb-list>
     <nb-list-item *ngFor="let user of users">

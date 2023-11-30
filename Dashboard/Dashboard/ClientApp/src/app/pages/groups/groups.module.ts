@@ -41,6 +41,7 @@ import { UsersApi } from '../../@core/backend/common/api/users.api';
     NbInputModule,
     NbFormFieldModule,
   ],
+  exports: [GroupsListComponent],
   declarations: [
     GroupsComponent,
     CreateGroupComponent,

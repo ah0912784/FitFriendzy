@@ -10,11 +10,13 @@ import { User } from '../../@core/interfaces/common/user';
 export class GroupsComponent implements OnInit {
 
   user: User;
+  loading = true;
   constructor(private service: UsersApi) { }
 
   ngOnInit(): void {
     this.service.getCurrent().subscribe((user) => {
       this.user = user;
+      this.loading = false;
     })
   }
 }

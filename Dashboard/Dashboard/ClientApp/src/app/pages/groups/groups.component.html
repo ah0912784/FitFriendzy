@@ -6,7 +6,10 @@
 
 <ngx-create-group></ngx-create-group>
 
-<nb-card>
+<nb-card accent="info" [nbSpinner]="loading"
+             nbSpinnerStatus="info"
+             nbSpinnerSize="large"
+             nbSpinnerMessage="">
   <nb-card-header>{{user?.userDisplayName}}'s groups</nb-card-header>
   <ngx-groups-list></ngx-groups-list>
 </nb-card>
