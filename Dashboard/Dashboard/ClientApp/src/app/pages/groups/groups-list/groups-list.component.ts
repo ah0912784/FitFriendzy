@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { GroupsApi } from '../../../@core/backend/common/api/groups.api';
+import { UsersApi } from '../../../@core/backend/common/api/users.api';
+import { User } from '../../../@core/interfaces/common/user';
+import { Group } from '../../../@core/interfaces/common/group';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-groups-list',
@@ -7,11 +12,28 @@ import { Component } from '@angular/core';
 })
 
 
-export class GroupsListComponent {
-  // Dummy data until proper db pull
-  groups = ["MSU Golf Friends", "Ragin' Tornados", "Wacky Warriors"]
+export class GroupsListComponent implements OnInit {
+  user: User
+  groups: Group[];
+  constructor(
+    private apiService: GroupsApi,
+    private userService: UsersApi,
+    private router: Router
+  ) { }
 
-  // Needs -- pull users groups
-  // set button to view each group? Not sure how we want to handle this tbh
+  ngOnInit(): void {
+    this.userService.getCurrent().subscribe((user) => {
+      this.user = user;
+
+      this.apiService.getAllByUserId(this.user.userId).subscribe((groups) => {
+        this.groups = groups;
+      })
+
+    })
+  }
+
+  viewGroup(groupId: string) {
+    this.router.navigate([`/pages/groups/${groupId}`]);
+  }
 
 }

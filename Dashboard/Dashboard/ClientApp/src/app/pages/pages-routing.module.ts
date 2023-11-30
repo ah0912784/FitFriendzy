@@ -8,6 +8,7 @@ import { GroupsComponent } from './groups/groups.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
+import { GroupComponent } from './groups/group/group.component';
 
 const routes: Routes = [{
   path: '',
@@ -20,6 +21,10 @@ const routes: Routes = [{
     {
       path: 'groups',
       component: GroupsComponent,
+    },
+    {
+      path: 'groups/:groupId',
+      component: GroupComponent
     },
     {
       path: 'leaderboard',

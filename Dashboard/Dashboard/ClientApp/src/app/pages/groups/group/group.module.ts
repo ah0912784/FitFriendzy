@@ -14,14 +14,10 @@ import {
   NbFormFieldModule,
 } from '@nebular/theme';
 
-import { ReactiveFormsModule } from '@angular/forms';
-import { ThemeModule } from '../../@theme/theme.module';
-import { GroupsComponent } from './groups.component';
-import { CreateGroupComponent } from './create-group/create-group.component';
-import { GroupsListComponent } from './groups-list/groups-list.component';
-import { GroupComponent } from './group/group.component';
-import { GroupsApi } from '../../@core/backend/common/api/groups.api';
-import { UsersApi } from '../../@core/backend/common/api/users.api';
+import { ThemeModule } from '../../../@theme/theme.module';
+import { GroupComponent } from './group.component';
+import { UsersApi } from '../../../@core/backend/common/api/users.api';
+import { GroupsApi } from '../../../@core/backend/common/api/groups.api';
 
 @NgModule({
   imports: [
@@ -37,19 +33,15 @@ import { UsersApi } from '../../@core/backend/common/api/users.api';
     NbSpinnerModule,
     NbIconModule,
     NbButtonModule,
-    ReactiveFormsModule,
     NbInputModule,
     NbFormFieldModule,
   ],
   declarations: [
-    GroupsComponent,
-    CreateGroupComponent,
-    GroupsListComponent,
-    GroupComponent
+    GroupComponent,
   ],
   providers: [
     GroupsApi,
     UsersApi
   ]
 })
-export class GroupsModule { }
+export class GroupModule { }

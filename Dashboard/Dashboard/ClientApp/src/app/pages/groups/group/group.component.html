@@ -1,0 +1,8 @@
+<nb-card>
+  <nb-card-header>Welcome to {{group?.groupName}}!</nb-card-header>
+  <nb-list>
+    <nb-list-item *ngFor="let user of users">
+      <div>{{ user?.userDisplayName }}</div>
+    </nb-list-item>
+  </nb-list>
+</nb-card>
