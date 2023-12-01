@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import {
   NbProgressBarModule,
+  NbCalendarModule,
   NbTabsetModule,
   NbUserModule,
   NbSelectModule,
@@ -12,6 +13,7 @@ import {
   NbIconModule,
   NbInputModule
 } from '@nebular/theme';
+import { NbCalendarRangeModule } from '@nebular/theme';
 import { NbAutocompleteModule } from '@nebular/theme';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ThemeModule } from '../../@theme/theme.module';
@@ -25,6 +27,7 @@ import { GroupsModule } from '../groups/groups.module';
 @NgModule({
   imports: [
     ThemeModule,
+    NbCalendarRangeModule,
     NbAutocompleteModule,
     NbCardModule,
     NbButtonModule,
@@ -39,7 +42,8 @@ import { GroupsModule } from '../groups/groups.module';
     NbButtonModule,
     ReactiveFormsModule,
     NbInputModule,
-    GroupsModule
+    GroupsModule,
+    NbCalendarModule,
   ],
   declarations: [
     HomeComponent,

@@ -10,14 +10,8 @@
       <nb-card-header>Quick Activity</nb-card-header>
       <ngx-home-input></ngx-home-input>
     </nb-card>
-    <nb-card size="small">
-      <nb-card-header>Goal Progress</nb-card-header>
-      <ngx-home-progress></ngx-home-progress>
-    </nb-card>
-    <nb-card size="small">
-      <nb-card-header>Groups</nb-card-header>
-      <ngx-groups-list [public]="false"></ngx-groups-list>
-    </nb-card>
+    <ngx-home-progress></ngx-home-progress>
+
   </div>
 
   <div class="col-md">
@@ -27,6 +21,10 @@
         <ngx-home-activity></ngx-home-activity>
       </nb-card>
     </div>
+    <nb-card size="small">
+      <nb-card-header>Groups</nb-card-header>
+      <ngx-groups-list [public]="false"></ngx-groups-list>
+    </nb-card>
     <div class="col-md">
       <nb-card size="small">
         <nb-card-header>To meet your goal, try:</nb-card-header>
