@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsersApi } from '../../@core/backend/common/api/users.api';
-import { UserDto } from '../../@core/interfaces/common/user';
+import { User } from '../../@core/interfaces/common/user';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -13,12 +13,11 @@ export class ProfileComponent implements OnInit, OnDestroy  {
   protected readonly unsubscribe$ = new Subject<void>();
   constructor(private service: UsersApi) { }
 
-  public users: UserDto[];
+  public user: User;
 
   ngOnInit(): void {
-    this.service.getAll().subscribe((users) => {
-      console.log(users);
-      this.users = users;
+    this.service.getCurrent().subscribe((user) => {
+      this.user = user;
     });
   }
 

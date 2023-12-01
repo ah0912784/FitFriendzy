@@ -10,13 +10,18 @@ import {
   NbButtonModule,
   NbCardModule,
   NbIconModule,
+  NbInputModule,
+  NbFormFieldModule,
 } from '@nebular/theme';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { ThemeModule } from '../../@theme/theme.module';
 import { GroupsComponent } from './groups.component';
-import { GroupsCreateComponent } from './groups_create/groups_create.component';
-import { GroupsViewComponent } from './groups_view/groups_view.component';
+import { CreateGroupComponent } from './create-group/create-group.component';
+import { GroupsListComponent } from './groups-list/groups-list.component';
+import { GroupComponent } from './group/group.component';
+import { GroupsApi } from '../../@core/backend/common/api/groups.api';
+import { UsersApi } from '../../@core/backend/common/api/users.api';
 
 @NgModule({
   imports: [
@@ -33,11 +38,19 @@ import { GroupsViewComponent } from './groups_view/groups_view.component';
     NbIconModule,
     NbButtonModule,
     ReactiveFormsModule,
+    NbInputModule,
+    NbFormFieldModule,
   ],
+  exports: [GroupsListComponent],
   declarations: [
     GroupsComponent,
-    GroupsCreateComponent,
-    GroupsViewComponent,
+    CreateGroupComponent,
+    GroupsListComponent,
+    GroupComponent
   ],
+  providers: [
+    GroupsApi,
+    UsersApi
+  ]
 })
 export class GroupsModule { }

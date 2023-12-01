@@ -3,8 +3,6 @@ using Dashboard.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using System.Web.Http.Results;
 
 namespace Dashboard.Controllers
 {
@@ -21,7 +19,7 @@ namespace Dashboard.Controllers
 
         // GET: api/<UserController>
         [HttpGet]
-        [Route("[action]")]
+        [Route("get/all")]
         public async Task<IActionResult> GetAll()
         {
             using (var context = new FitFriendzyDatabaseContext())
@@ -58,30 +56,33 @@ namespace Dashboard.Controllers
             return userDtos;
         }
 
-        // GET api/<UserController>/5
-        //[HttpGet("{id}")]
-        //public User Get(Guid id)
-        //{
-        //    using (var context = new FitFriendzyDatabaseContext())
-        //    {
-        //        var users = context.Users;
-        //        if (users.IsNullOrEmpty()) {
-        //            return new User();
-        //        }
+        // GET api/<UserController>/get/{userId}
+        [HttpGet]
+        [Route("get/{userId}")]
+        public User GetUser(Guid userId)
+        {
+            using (var context = new FitFriendzyDatabaseContext())
+            {
+                var users = context.Users;
+                if (users.IsNullOrEmpty())
+                {
+                    return new User();
+                }
 
-        //        var user = context.Users.Find(id);
-                
-        //        if (user == null) {
-        //            return null;
-        //        }
+                var user = context.Users.Find(userId);
 
-        //        return user;
-        //    }
-        //}
+                if (user == null)
+                {
+                    return null;
+                }
 
-        // POST api/<UserController>
+                return user;
+            }
+        }
+
+        // POST api/<UserController>/create/new
         [HttpPost]
-        [Route("[action]")]
+        [Route("/create/new")]
         public async Task<IActionResult> CreateNewUser(UserDto newUser)
         {
             if (newUser == null)

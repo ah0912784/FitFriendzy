@@ -1,0 +1,5 @@
+<nb-list>
+  <nb-list-item *ngFor="let group of groups">
+    <button nbButton style="float:right" status='info' (click)="viewGroup(group?.groupId)">View Group</button> &nbsp;&nbsp;&nbsp; {{ group?.groupName }}
+  </nb-list-item>
+</nb-list>

@@ -5,8 +5,9 @@
   <nb-card-body>
     <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <input type="text" id="groupName" formControlName="groupName" nbInput fullWidth>
-        <label for="groupName">&nbsp;- Group Name</label>
+        <label for="groupName">Group Name: </label>
+        <input type="text" nbInput fullWidth id="groupName" formControlName="groupName">
+
         <div *ngIf="groupForm.get('groupName').hasError('required') && groupForm.get('groupName').touched">
           Group name is required.
         </div>
