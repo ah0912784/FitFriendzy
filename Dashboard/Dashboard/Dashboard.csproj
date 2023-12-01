@@ -45,7 +45,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\%40core\backend\common\services\" />
     <Folder Include="ClientApp\src\assets\images\" />
   </ItemGroup>
 

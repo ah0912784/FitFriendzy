@@ -6,10 +6,26 @@
 
 <ngx-create-group></ngx-create-group>
 
-<nb-card accent="info" [nbSpinner]="loading"
+<div class="row">
+
+  <div class="col-md">
+    <nb-card accent="info" [nbSpinner]="loading"
              nbSpinnerStatus="info"
              nbSpinnerSize="large"
              nbSpinnerMessage="">
-  <nb-card-header>{{user?.userDisplayName}}'s groups</nb-card-header>
-  <ngx-groups-list></ngx-groups-list>
-</nb-card>
+      <nb-card-header>{{user?.userDisplayName}}'s groups</nb-card-header>
+      <ngx-groups-list [public]="false"></ngx-groups-list>
+    </nb-card>
+  </div>
+
+  <div class="col-md">
+    <nb-card accent="info" [nbSpinner]="loading"
+             nbSpinnerStatus="info"
+             nbSpinnerSize="large"
+             nbSpinnerMessage="">
+      <nb-card-header>Recommended Groups to Join!</nb-card-header>
+      <ngx-groups-list [public]="true"></ngx-groups-list>
+    </nb-card>
+  </div>
+
+</div>

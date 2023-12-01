@@ -56,10 +56,10 @@ namespace Dashboard.Controllers
             return userDtos;
         }
 
-        // GET api/<UserController>/5
+        // GET api/<UserController>/get/{userId}
         [HttpGet]
-        [Route("get/{id}")]
-        public User GetUser(Guid id)
+        [Route("get/{userId}")]
+        public User GetUser(Guid userId)
         {
             using (var context = new FitFriendzyDatabaseContext())
             {
@@ -69,7 +69,7 @@ namespace Dashboard.Controllers
                     return new User();
                 }
 
-                var user = context.Users.Find(id);
+                var user = context.Users.Find(userId);
 
                 if (user == null)
                 {
@@ -80,7 +80,7 @@ namespace Dashboard.Controllers
             }
         }
 
-        // POST api/<UserController>
+        // POST api/<UserController>/create/new
         [HttpPost]
         [Route("/create/new")]
         public async Task<IActionResult> CreateNewUser(UserDto newUser)

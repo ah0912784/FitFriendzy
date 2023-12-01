@@ -55,41 +55,17 @@
 
   <nb-accordion-item>
     <nb-accordion-item-header>
-      View Users
+      Switch User
     </nb-accordion-item-header>
     <nb-accordion-item-body>
       <nb-card>
         <nb-card-body>
 
-          <table [nbTreeGrid]="dataSource" nbSort (sort)="changeSort($event)" equalColumnsWidth>
-
-            <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
-            <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
-
-            <ng-container [nbTreeGridColumnDef]="customColumn">
-              <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(customColumn)" *nbTreeGridHeaderCellDef>
-                {{customColumn}}
-              </th>
-
-              <td nbTreeGridCell *nbTreeGridCellDef="let row">
-
-                <!--<nb-tree-grid-row-toggle [expanded]="row.expanded"
-                                   *ngIf="row.data.kind === 'dir'">
-          </nb-tree-grid-row-toggle>-->
-                {{row.data.userId}}
-
-              </td>
-            </ng-container>
-
-            <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
-              <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(column)" *nbTreeGridHeaderCellDef>
-                {{column}}
-              </th>
-
-              <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
-            </ng-container>
-
-          </table>
+          <nb-list>
+            <nb-list-item *ngFor="let user of users">
+              <button nbButton style="float:right" status='info' (click)="switchUser(user?.userId)">Switch User</button> &nbsp;&nbsp;&nbsp; {{ user?.userDisplayName }}
+            </nb-list-item>
+          </nb-list>
 
         </nb-card-body>
       </nb-card>

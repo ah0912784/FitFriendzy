@@ -1,5 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { UsersApi } from '../../../@core/backend/common/api/users.api';
 
 @Component({
   selector: 'ngx-home-name',
@@ -9,11 +10,19 @@ import { Subject } from 'rxjs';
   `,
 })
 
-export class HomeNameComponent implements OnDestroy {
+export class HomeNameComponent implements OnInit, OnDestroy {
   protected readonly destroying$ = new Subject<void>();
-  // Dummy data until we can properly pull it
-  firstName = 'John';
-  lastName = 'Doe';
+  firstName;
+  lastName;
+
+  constructor(private service: UsersApi) { }
+
+  ngOnInit(): void {
+    this.service.getCurrent().subscribe((user) => {
+      this.firstName = user.firstName;
+      this.lastName = user.lastName;
+    })
+  }
 
   ngOnDestroy(): void {
     this.destroying$.next();

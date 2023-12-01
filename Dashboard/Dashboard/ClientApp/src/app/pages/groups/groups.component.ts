@@ -11,10 +11,10 @@ export class GroupsComponent implements OnInit {
 
   user: User;
   loading = true;
-  constructor(private service: UsersApi) { }
+  constructor(private userService: UsersApi) { }
 
   ngOnInit(): void {
-    this.service.getCurrent().subscribe((user) => {
+    this.userService.getCurrent().subscribe((user) => {
       this.user = user;
       this.loading = false;
     })

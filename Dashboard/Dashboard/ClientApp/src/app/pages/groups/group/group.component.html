@@ -2,7 +2,7 @@
              nbSpinnerStatus="info"
              nbSpinnerSize="large"
              nbSpinnerMessage="">
-  <nb-card-header>Welcome to {{group?.groupName}}!</nb-card-header>
+  <nb-card-header>Welcome to {{group?.groupName}}! <button *ngIf="!userInGroup" nbButton style="float:right" status='info' (click)="joinGroup()">Join Group</button></nb-card-header>
   <nb-list>
     <nb-list-item *ngFor="let user of users">
       <div>{{ user?.userDisplayName }}</div>

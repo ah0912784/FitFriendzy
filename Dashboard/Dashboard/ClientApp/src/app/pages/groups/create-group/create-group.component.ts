@@ -7,16 +7,13 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NbComponentStatus, NbToastrService } from '@nebular/theme';
 import { UsersApi } from '../../../@core/backend/common/api/users.api';
+import { GroupDataService } from '../../../@core/backend/common/services/group.service';
 
 
 @Component({
   selector: 'ngx-create-group',
   templateUrl: './create-group.component.html',
 })
-
-// Needs:
-// Method to test if name is taken
-// Method to push new group to database
 
 export class CreateGroupComponent implements OnInit, OnDestroy {
   protected readonly destroying$ = new Subject<void>();
@@ -27,7 +24,8 @@ export class CreateGroupComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private toastrService: NbToastrService,
     private apiService: GroupsApi,
-    private userService: UsersApi) {
+    private userService: UsersApi,
+    private dataService: GroupDataService) {
     this.groupForm = this.fb.group({
       groupName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
     });
@@ -48,10 +46,11 @@ export class CreateGroupComponent implements OnInit, OnDestroy {
 
       const group: Group = this.convertToGroup(this.groupForm.value);
       console.log("Group: ", group);
-      this.apiService.createNew(group)
+      this.apiService.createNewGroup(group)
         .pipe(takeUntil(this.destroying$))
         .subscribe((g) => {
           this.handleSuccessResponse('success');
+          this.dataService.notifyGroupAdded();
         },
           err => {
             this.handleWrongResponse(err);

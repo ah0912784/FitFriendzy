@@ -10,6 +10,61 @@ namespace Dashboard.Controllers
     [ApiController]
     public class GroupsController : ControllerBase
     {
+        // GET api/<UserController>/get/all
+        [HttpGet]
+        [Route("get/all")]
+        public async Task<IActionResult> GetAllGroups()
+        {
+            using (var context = new FitFriendzyDatabaseContext())
+            {
+                try
+                {
+                    // retrieve groups based on the group IDs obtained
+                    var groups = await context.Groups.ToListAsync();
+
+                    return Ok(groups);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Failed to get group groups: {ex}");
+                }
+            }
+        }
+
+        // GET api/<UserController>/get/all/other
+        [HttpGet]
+        [Route("get/all/other/{userId}")]
+        public async Task<IActionResult> GetAllOtherGroupsByUserId(Guid userId)
+        {
+            using (var context = new FitFriendzyDatabaseContext())
+            {
+                try
+                {
+                    if(Guid.Empty == userId)
+                    {
+                        BadRequest("Empty user id");
+                    }
+
+                    // Retrieve the list of group IDs the user is associated with
+                    var groupIdsUserIsIn = await context.UserGroupMemberships
+                        .Where(membership => membership.UserId == userId)
+                        .Select(membership => membership.GroupId)
+                        .ToListAsync();
+
+                    // Retrieve the list of groups where the user is not a member
+                    var groupsUserIsNotIn = await context.Groups
+                        .Where(group => !groupIdsUserIsIn.Contains(group.GroupId))
+                        .ToListAsync();
+
+                    return Ok(groupsUserIsNotIn);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Failed to get group groups: {ex}");
+                }
+            }
+        }
+
         // GET api/<UserController>/get/all/{userId}
         [HttpGet]
         [Route("get/all/{userId}")]
@@ -90,7 +145,7 @@ namespace Dashboard.Controllers
             }
         }
 
-        // GET api/<UserController>/get/all/groups/{userId}
+        // GET api/<UserController>/get/{userId}
         [HttpGet]
         [Route("get/{userId}")]
         public async Task<IActionResult> GetGroupById(Guid userId)
@@ -151,16 +206,38 @@ namespace Dashboard.Controllers
             }
         }
 
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // POST api/<UserController>/join/new
+        [HttpPost]
+        [Route("join/new")]
+        public async Task<IActionResult> JoinNewGroup(UserGroupMemberShipDto membership)
         {
-        }
+            if (membership == null)
+            {
+                return BadRequest("No group info provided");
+            }
 
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            using (var context = new FitFriendzyDatabaseContext())
+            {
+                try
+                {
+                    var userGroupMembership = membership.ToPersisted();
+                    userGroupMembership.MembershipId = Guid.NewGuid();
+
+                    await context.UserGroupMemberships.AddAsync(userGroupMembership);
+
+                    var created = await context.SaveChangesAsync();
+                    if (created > 0)
+                    {
+                        return Ok();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Failed to create group: {ex}");
+                }
+
+                return BadRequest("Error");
+            }
         }
     }
 }
