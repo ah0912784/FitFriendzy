@@ -28,22 +28,23 @@ import { DatePipe } from '@angular/common';
       <nb-calendar-range [(range)]="range" format="dd.MM.yyyy"></nb-calendar-range>
     </nb-card-body>
     <nb-card-body>
-    <nb-card>
     <form [formGroup]="goalForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="gpoints">Goal Points: </label>
           <input type="number" placeholder="Points To Earn" formControlName="gpoints" nbInput>
+          <button nbButton class="but" status="primary" type="submit">Set Goal</button>
         </div>
-      <button nbButton status="primary" type="submit">Set Goal</button>
     </form>
-  </nb-card>  
-  
     
   `,
   styles: [`
     * {
       padding-left: 10px;
       padding-right: 10px;
+    }
+
+    .but {
+      margin-left: 10px;
     }
   `]
 })
