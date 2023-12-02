@@ -23,6 +23,7 @@ import { HomeNameComponent } from './home_name/home_name.component';
 import { HomeProgressComponent } from './home_progress/home_progress.component';
 import { HomeInputComponent } from './home_inputs/home_input.component';
 import { GroupsModule } from '../groups/groups.module';
+import { UserGoalsApi } from '../../@core/backend/common/api/usergoals.api';
 
 @NgModule({
   imports: [
@@ -52,5 +53,8 @@ import { GroupsModule } from '../groups/groups.module';
     HomeProgressComponent,
     HomeInputComponent
   ],
+  providers: [
+    UserGoalsApi
+  ]
 })
 export class HomeModule { }
