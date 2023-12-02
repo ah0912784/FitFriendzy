@@ -1,19 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {
-  NbComponentStatus,
-  NbSortDirection, NbSortRequest,
-  NbToastrService, NbTreeGridDataSource, NbTreeGridDataSourceBuilder
+  NbComponentStatus, NbToastrService,
 } from '@nebular/theme';
-import { User, UserDto } from '../../@core/interfaces/common/user';
+import { User } from '../../@core/interfaces/common/user';
 import { UsersApi } from '../../@core/backend/common/api/users.api';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-
-interface TreeNode<T> {
-  data: T;
-  children?: TreeNode<T>[];
-  expanded?: boolean;
-}
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'ngx-users',
@@ -24,44 +17,57 @@ interface TreeNode<T> {
 
 export class UsersComponent implements OnInit, OnDestroy {
   constructor(private service: UsersApi,
-    private toastrService: NbToastrService,
-    private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>) {
-    this.dataSource = this.dataSourceBuilder.create(this.data);
+    private toastrService: NbToastrService) {
   }
 
   protected readonly destroying$ = new Subject<void>();
 
   submitted = false;
-
-  newUser: UserDto;
+  loading = true;
+  newUser: User;
+  users: User[];
 
   ngOnInit(): void {
     this.newUserModel();
+
+    this.service.getCurrent().subscribe((user) => {
+
+      this.service.getAll().subscribe((users) => {
+        this.users = users.filter((x) => x.userId !== user.userId);
+        this.loading = false;
+      });
+    });
+  }
+
+  switchUser(userId: string) {
+    this.service.switchToUser(userId).subscribe((user) => {
+      this.toastrService.success('Success', `Successfully switched to user ${user.userDisplayName}`);
+    })
   }
 
   onSubmit() {
     this.submitted = true;
     console.log(this.newUser);
 
-    const user: UserDto = this.convertToUser(this.newUser);
+    const user: User = this.convertToUser(this.newUser);
     this.service.createNew(user)
       .pipe(takeUntil(this.destroying$))
-      .subscribe((user: UserDto) => {
-        this.handleSuccessResponse(user, 'success');
+      .subscribe((user) => {
+        this.handleSuccessResponse('success');
       },
       err => {
         this.handleWrongResponse(err);
       });
   }
 
-  convertToUser(value: any): UserDto {
+  convertToUser(value: any): User {
     const entity = this.getPersistedModel(value);
 
     return entity;
   }
 
-  getPersistedModel(value: any): UserDto {
-    let retval: UserDto = {
+  getPersistedModel(value: any): User {
+    let retval: User = {
       userId: value.userId ? value.userId : null,
       firstName: value.firstName ? value.firstName : "",
       lastName:  value.lastName ? value.lastName : "",
@@ -84,13 +90,13 @@ export class UsersComponent implements OnInit, OnDestroy {
       firstName: "",
       lastName: "",
       email: "",
-      phoneNumber: "1234567890"
+      phoneNumber: ""
     }
   }
 
-  handleSuccessResponse(user: UserDto, status: NbComponentStatus) {
+  handleSuccessResponse(status: NbComponentStatus) {
     this.newUserModel();
-    this.toastrService.success(status, `Successfully added ${user.userName}`);
+    this.toastrService.success(status, `Successfully added new user!`);
   }
 
   handleWrongResponse(err: any) {
@@ -102,65 +108,65 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.destroying$.complete();
   }
 
-  customColumn = 'userId';
-  defaultColumns = ['userDisplayName', 'userName', 'password', 'firstName', 'lastName', 'email', 'phoneNumber'];
-  allColumns = [this.customColumn, ...this.defaultColumns];
+  // customColumn = 'userId';
+  // defaultColumns = ['userDisplayName', 'userName', 'password', 'firstName', 'lastName', 'email', 'phoneNumber'];
+  // allColumns = [this.customColumn, ...this.defaultColumns];
 
-  dataSource: NbTreeGridDataSource<any>;
+  // dataSource: NbTreeGridDataSource<any>;
 
-  sortColumn: string = '';
-  sortDirection: NbSortDirection = NbSortDirection.NONE;
+  // sortColumn: string = '';
+  // sortDirection: NbSortDirection = NbSortDirection.NONE;
 
-  changeSort(sortRequest: NbSortRequest): void {
-    this.dataSource.sort(sortRequest);
-    this.sortColumn = sortRequest.column;
-    this.sortDirection = sortRequest.direction;
-  }
+  // changeSort(sortRequest: NbSortRequest): void {
+  //  this.dataSource.sort(sortRequest);
+  //  this.sortColumn = sortRequest.column;
+  //  this.sortDirection = sortRequest.direction;
+  // }
 
-  getDirection(column: string): NbSortDirection {
-    if (column === this.sortColumn) {
-      return this.sortDirection;
-    }
-    return NbSortDirection.NONE;
-  }
+  // getDirection(column: string): NbSortDirection {
+  //  if (column === this.sortColumn) {
+  //    return this.sortDirection;
+  //  }
+  //  return NbSortDirection.NONE;
+  // }
 
-  private data: TreeNode<UserDto>[] = [
-    {
-      data: {
-        userId: "000-00000-00001",
-        userDisplayName: "Leanne Graham",
-        userName: "JohnDoe22",
-        password: "testing124",
-        firstName: "John",
-        lastName: "Doe",
-        email: "test@gmail.com",
-        phoneNumber: "1234567890"
-      }
-    },
-    {
-      data: {
-        userId: "000-00000-00002",
-        userDisplayName: "Leanne Graham",
-        userName: "JohnDoe22",
-        password: "LEAnneG11",
-        firstName: "John",
-        lastName: "Doe",
-        email: "test@gmail.com",
-        phoneNumber: "1234567890"
-      },
-    },
-    {
-      data: {
-        userId: "000-00000-00003",
-        userDisplayName: "Leanne Graham",
-        userName: "JohnDoe22",
-        password: "OpsINeedHelp",
-        firstName: "John",
-        lastName: "Doe",
-        email: "test@gmail.com",
-        phoneNumber: "1234567890"
-      }
-    }
-  ];
+  // private data: TreeNode<User>[] = [
+  //  {
+  //    data: {
+  //      userId: "000-00000-00001",
+  //      userDisplayName: "Leanne Graham",
+  //      userName: "JohnDoe22",
+  //      password: "testing124",
+  //      firstName: "John",
+  //      lastName: "Doe",
+  //      email: "test@gmail.com",
+  //      phoneNumber: "1234567890"
+  //    }
+  //  },
+  //  {
+  //    data: {
+  //      userId: "000-00000-00002",
+  //      userDisplayName: "Leanne Graham",
+  //      userName: "JohnDoe22",
+  //      password: "LEAnneG11",
+  //      firstName: "John",
+  //      lastName: "Doe",
+  //      email: "test@gmail.com",
+  //      phoneNumber: "1234567890"
+  //    },
+  //  },
+  //  {
+  //    data: {
+  //      userId: "000-00000-00003",
+  //      userDisplayName: "Leanne Graham",
+  //      userName: "JohnDoe22",
+  //      password: "OpsINeedHelp",
+  //      firstName: "John",
+  //      lastName: "Doe",
+  //      email: "test@gmail.com",
+  //      phoneNumber: "1234567890"
+  //    }
+  //  }
+  // ];
 }
 

@@ -21,6 +21,8 @@ public partial class FitFriendzyDatabaseContext : DbContext
 
     public virtual DbSet<UserActivity> UserActivities { get; set; }
 
+    public virtual DbSet<UserGoal> UserGoals { get; set; }
+
     public virtual DbSet<UserGroupMembership> UserGroupMemberships { get; set; }
 
     public virtual DbSet<UserSetting> UserSettings { get; set; }
@@ -129,6 +131,20 @@ public partial class FitFriendzyDatabaseContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UserActivity_User");
+        });
+
+        modelBuilder.Entity<UserGoal>(entity =>
+        {
+            entity.HasKey(e => e.GoalId).HasName("PK__UserGoal__76679A2449647CC7");
+
+            entity.Property(e => e.GoalId)
+                .ValueGeneratedNever()
+                .HasColumnName("goal_id");
+            entity.Property(e => e.CurrentPoints).HasColumnName("current_points");
+            entity.Property(e => e.EndTime).HasColumnName("end_time");
+            entity.Property(e => e.StartTime).HasColumnName("start_time");
+            entity.Property(e => e.TargetPoints).HasColumnName("target_points");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 
         modelBuilder.Entity<UserGroupMembership>(entity =>

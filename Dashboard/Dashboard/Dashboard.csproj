@@ -44,7 +44,6 @@
     <Content Include="ClientApp\tslint.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\%40core\backend\common\services\" />
     <Folder Include="ClientApp\src\assets\images\" />
     <Content Update="package-lock.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

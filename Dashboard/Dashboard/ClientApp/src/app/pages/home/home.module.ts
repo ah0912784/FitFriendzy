@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import {
   NbProgressBarModule,
+  NbCalendarModule,
   NbTabsetModule,
   NbUserModule,
   NbSelectModule,
@@ -10,20 +11,24 @@ import {
   NbButtonModule,
   NbCardModule,
   NbIconModule,
+  NbInputModule
 } from '@nebular/theme';
+import { NbCalendarRangeModule } from '@nebular/theme';
 import { NbAutocompleteModule } from '@nebular/theme';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ThemeModule } from '../../@theme/theme.module';
 import { HomeComponent } from './home.component';
-import { HomeGroupComponent } from './home_groups/home_groups.component';
 import { HomeActivityComponent } from './home_activity_feed/home_activity.component';
 import { HomeNameComponent } from './home_name/home_name.component';
 import { HomeProgressComponent } from './home_progress/home_progress.component';
 import { HomeInputComponent } from './home_inputs/home_input.component';
+import { GroupsModule } from '../groups/groups.module';
+import { UserGoalsApi } from '../../@core/backend/common/api/usergoals.api';
 
 @NgModule({
   imports: [
     ThemeModule,
+    NbCalendarRangeModule,
     NbAutocompleteModule,
     NbCardModule,
     NbButtonModule,
@@ -37,14 +42,19 @@ import { HomeInputComponent } from './home_inputs/home_input.component';
     NbIconModule,
     NbButtonModule,
     ReactiveFormsModule,
+    NbInputModule,
+    GroupsModule,
+    NbCalendarModule,
   ],
   declarations: [
     HomeComponent,
-    HomeGroupComponent,
     HomeActivityComponent,
     HomeNameComponent,
     HomeProgressComponent,
-    HomeInputComponent,
+    HomeInputComponent
   ],
+  providers: [
+    UserGoalsApi
+  ]
 })
 export class HomeModule { }

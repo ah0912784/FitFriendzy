@@ -7,17 +7,11 @@
 <div class="row">
   <div class="col-md">
     <nb-card size="small">
-      <nb-card-header>Point Entry</nb-card-header>
+      <nb-card-header>Quick Activity</nb-card-header>
       <ngx-home-input></ngx-home-input>
     </nb-card>
-    <nb-card size="small">
-      <nb-card-header>Goal Progress</nb-card-header>
-      <ngx-home-progress></ngx-home-progress>
-    </nb-card>
-    <nb-card size="small">
-      <nb-card-header>Groups</nb-card-header>
-      <ngx-home-groups></ngx-home-groups>
-    </nb-card>
+    <ngx-home-progress></ngx-home-progress>
+
   </div>
 
   <div class="col-md">
@@ -27,10 +21,24 @@
         <ngx-home-activity></ngx-home-activity>
       </nb-card>
     </div>
+    <nb-card size="small">
+      <nb-card-header>Groups</nb-card-header>
+      <ngx-groups-list [public]="false"></ngx-groups-list>
+    </nb-card>
     <div class="col-md">
       <nb-card size="small">
-        <nb-card-header>Recomendations</nb-card-header>
-        <p>needs work...</p>
+        <nb-card-header>To meet your goal, try:</nb-card-header>
+        <nb-list>
+          <nb-list-item>
+            <p>Running for 15 minutes + Bench Press for 4x4 at 75%</p>
+          </nb-list-item>
+          <nb-list-item>
+            <p>Back Squat for 4x6 at 75% + Stair Master for 10 minutes</p>
+          </nb-list-item>
+          <nb-list-item>
+            <p>Preacher Curls 4x10 at 50% + Sit-ups for 5x10</p>
+          </nb-list-item>
+        </nb-list>
       </nb-card>
     </div>
   </div>
