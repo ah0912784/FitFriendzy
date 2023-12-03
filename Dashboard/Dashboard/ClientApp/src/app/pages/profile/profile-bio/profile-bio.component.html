@@ -4,7 +4,7 @@
   </nb-card-header>
 
   <nb-card-body>
-    <BioEditComponent *ngIf="{{isEditing}}; else elseBlock"}}></BioEditComponent>
+    <ngx-bio-edit *ngIf="isEditing; else elseBlock"></ngx-bio-edit>
     <textarea #elseBlock>
        {{ bio }}
     </textarea>

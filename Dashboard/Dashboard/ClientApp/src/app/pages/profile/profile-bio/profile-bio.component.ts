@@ -1,19 +1,20 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
+
 
 @Component({
   selector: 'ngx-profile-bio',
   templateUrl: './profile-bio.component.html',
-  styleUrls: ['./profile-bio.component.scss'],
 })
 export class ProfileBioComponent {
-  @Input() name: string;
-  @Input() bio: string;
+  @Input() public name: string;
+  @Input() public bio: string;
+
   isEditing = false;
 
-  toggleEditMode() {
+  toggleEditMode(): void {
     this.isEditing = !this.isEditing;
   }
-  changeBio(newBio) {
+  updateBio(newBio: string): void  {
     this.bio = newBio;
   }
 }
