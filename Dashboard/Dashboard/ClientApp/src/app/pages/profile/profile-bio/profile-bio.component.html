@@ -4,10 +4,14 @@
   </nb-card-header>
 
   <nb-card-body>
-    <nb-form-field>
-      <nb-icon nbPrefix icon="edit-2-outline"></nb-icon>
-      <input type="text" nbInput>
-    </nb-form-field>
-
+    <BioEditComponent *ngIf="{{isEditing}}; else elseBlock"}}></BioEditComponent>
+    <textarea #elseBlock>
+       {{ bio }}
+    </textarea>
   </nb-card-body>
+  <nb-card-footer>
+    <button nbButton>
+      <nb-icon nbPrefix icon="edit-2-outline" , onclick="toggleEditMode()"></nb-icon>
+    </button>
+  </nb-card-footer>
 </nb-card>

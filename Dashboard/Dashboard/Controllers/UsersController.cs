@@ -49,7 +49,8 @@ namespace Dashboard.Controllers
                     FirstName = u.FirstName,
                     LastName = u.LastName,
                     Email = u.Email,
-                    PhoneNumber = Convert.ToString(u.PhoneNumber)
+                    PhoneNumber = Convert.ToString(u.PhoneNumber),
+                    Bio = u.PhoneNumber
                 })
                 .ToList();
 

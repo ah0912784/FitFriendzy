@@ -31,8 +31,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   // Function to update the bio of the user
   updateBio(newBio: string): void {
     // Assuming UserDto has a property named 'id'
-    const userId = this.users.UserId;
+    const userId = this.user.userId;
+    console.log(${ newBio });
+    // db push here
     // this.service.updateUserBio(userId, newBio).subscribe(() => {
       // Handle any post-update logic
       // Reload the user or update the user's bio directly
     // });
+  }
+}

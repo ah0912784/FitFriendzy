@@ -29,7 +29,7 @@ export class GroupComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private apiService: GroupsApi,
     private userService: UsersApi,
-    private toastrService: NbToastrService
+    private toastrService: NbToastrService,
   ) { }
 
   ngOnInit() {
@@ -65,8 +65,8 @@ export class GroupComponent implements OnInit, OnDestroy {
     let membership: UserGroupMembership = {
       userId: this.currentUser.userId,
       groupId: this.group.groupId,
-      isAdmin: false
-    }
+      isAdmin: false,
+    };
 
     this.apiService.joinNewGroup(membership).subscribe(() => {
       this.loadGroupDetails(this.group.groupId);

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input} from '@angular/core';
 
 @Component({
   selector: 'ngx-profile-bio',
@@ -8,14 +8,12 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class ProfileBioComponent {
   @Input() name: string;
   @Input() bio: string;
-  @Output() updateBio: EventEmitter<string> = new EventEmitter<string>();
   isEditing = false;
 
   toggleEditMode() {
     this.isEditing = !this.isEditing;
   }
-  saveBio() {
-    this.updateBio.emit(this.bio);
-    this.toggleEditMode();
+  changeBio(newBio) {
+    this.bio = newBio;
   }
 }

@@ -27,14 +27,10 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 
 // Import the Azure AD B2C configuration
 import { msalConfig, protectedResources } from './auth-config';
-import { ProfileEditComponent } from './profile-edit/profile-edit.component';
-import { ProfilePicComponent } from './profile-pic/profile-pic.component';
-import { ProfileBioComponent } from './profile-bio/profile-bio.component';
 
-/* Changes end here. */
 
 @NgModule({
-  declarations: [AppComponent, ProfileEditComponent, ProfilePicComponent, ProfileBioComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

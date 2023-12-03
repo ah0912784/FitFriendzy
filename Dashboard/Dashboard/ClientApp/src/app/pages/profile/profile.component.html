@@ -1,11 +1,8 @@
 <nb-layout>
-<<<<<<< HEAD
-  <nb-layout-header><h3>{{users?.firstName }} {{users?.lastName }}'s Profile</h3></nb-layout-header>
-  <h3>{{users?.firstName}} {{users?.lastName}}'s Profile</h3>
-=======
-  <nb-layout-header><h3>{{user?.firstName }} {{user?.lastName }}'s Profile</h3></nb-layout-header>
+  <nb-layout-header><h3>{{user?.firstName }} {{users?.lastName }}'s Profile</h3></nb-layout-header>
   <h3>{{user?.firstName}} {{user?.lastName}}'s Profile</h3>
->>>>>>> c25dc9882470e75620653a84cd0cded565787c44
+  <nb-layout-header><h3>{{user?.firstName }} {{user?.lastName }}'s Profile</h3></nb-layout-header>
+  <h3>{{use?.firstName}} {{user?.lastName}}'s Profile</h3>
   <nb-layout-column>
     <!-- Contact Info -->
     <nb-card size="tiny">
@@ -14,27 +11,17 @@
       </nb-card-header>
       <nb-list>
         <nb-list-item>
-<<<<<<< HEAD
-          Email: {{users?.email}}
-         <button nbButton size ="tiny"><nb-icon icon="edit-2-outline"></nb-icon></button>
-        </nb-list-item>
-        <nb-list-item>
-          Phone number: {{users?.phoneNumber}}
-=======
           Email: {{user?.email}}
          <button nbButton size ="tiny"><nb-icon icon="edit-2-outline"></nb-icon></button>
         </nb-list-item>
         <nb-list-item>
           Phone number: {{user?.phoneNumber}}
->>>>>>> c25dc9882470e75620653a84cd0cded565787c44
           <button nbButton size="tiny"><nb-icon icon="edit-2-outline"></nb-icon></button>
         </nb-list-item>
       </nb-list>
     </nb-card>
     <!-- Biography Card -->
-   <ProfileBioComponent [name] = {{ users.displayName }}>
-
-   </ProfileBioComponent>
+   <ProfileBioComponent [name] = {{ user?.displayName }} [bio] ="{{ user?.Bio }}"></ProfileBioComponent>
     
   </nb-layout-column>
      
@@ -48,7 +35,7 @@
       </nb-card-header>
       <nb-card-body>
         <nb-list>
-          <nb-list-item *ngFor="let group of users?.userGroupMemberships">
+          <nb-list-item *ngFor="let group of users[0]?.userGroupMemberships">
             {{group}}
           </nb-list-item>
 
