@@ -42,25 +42,25 @@ namespace Dashboard.Controllers
         }
 
         // GET api/leaderboards/rank/1
-        [HttpGet("rank/{position}")]
-        public Leaderboard Get(int position)
-        {
-            using (var context = new FitFriendzyDatabaseContext())
-            {
-                var leaderboards = context.Leaderboards;
-                if (leaderboards.IsNullOrEmpty()) {
-                    return new Leaderboard();
-                }
+        //[HttpGet("rank/{position}")]
+        //public Leaderboard Get(int position)
+        //{
+        //    using (var context = new FitFriendzyDatabaseContext())
+        //    {
+        //        var leaderboards = context.Leaderboards;
+        //        if (leaderboards.IsNullOrEmpty()) {
+        //            return new Leaderboard();
+        //        }
 
-                var board = leaderboards.Where(board => board.Position == position).First();
+        //        var board = leaderboards.Where(board => board.Position == position).First();
                 
-                if (board == null) {
-                    return null;
-                }
+        //        if (board == null) {
+        //            return null;
+        //        }
 
-                return board;
-            }
-        }
+        //        return board;
+        //    }
+        //}
 
         // POST api/leaderboards
         [HttpPost]

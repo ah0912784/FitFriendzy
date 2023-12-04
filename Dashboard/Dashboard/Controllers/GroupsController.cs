@@ -191,6 +191,16 @@ namespace Dashboard.Controllers
                     var groupMembership = group.ToNewGroupMembership();
                     await context.UserGroupMemberships.AddAsync(groupMembership);
 
+                    var leaderboard = new Leaderboard()
+                    {
+                        LeaderboardId = Guid.NewGuid(),
+                        GroupId = group.GroupId
+                    };
+                    await context.Leaderboards.AddAsync(leaderboard);
+
+                    var leaderboardUserMembership = leaderboard.ToNewLeaderboardUserMembership(group.GroupLeaderId);
+                    await context.LeaderboardUserMemberships.AddAsync(leaderboardUserMembership);
+
                     var created = await context.SaveChangesAsync();
                     if (created > 0)
                     {
@@ -225,6 +235,10 @@ namespace Dashboard.Controllers
 
                     await context.UserGroupMemberships.AddAsync(userGroupMembership);
 
+                    var leaderboard = GetGroupLeaderboardById(membership.GroupId);
+                    var leaderboardUserMembership = leaderboard.ToNewLeaderboardUserMembership(membership.UserId);
+                    await context.LeaderboardUserMemberships.AddAsync(leaderboardUserMembership);
+
                     var created = await context.SaveChangesAsync();
                     if (created > 0)
                     {
@@ -237,6 +251,23 @@ namespace Dashboard.Controllers
                 }
 
                 return BadRequest("Error");
+            }
+        }
+
+        public Leaderboard GetGroupLeaderboardById(Guid? groupId)
+        {
+            using (var context = new FitFriendzyDatabaseContext())
+            {
+                try
+                {
+                    var leaderboard = context.Leaderboards
+                        .FirstOrDefault(l => l.GroupId == groupId);
+                    return leaderboard;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
             }
         }
     }
