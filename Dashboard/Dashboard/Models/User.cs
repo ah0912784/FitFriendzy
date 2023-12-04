@@ -22,7 +22,7 @@ namespace Dashboard.Models
 
         public string PhoneNumber { get; set; }
 
-        public string Bio {get; set; }
+        //public string Bio {get; set; }
 
         public virtual ICollection<Leaderboard> Leaderboards { get; set; } = new List<Leaderboard>();
 

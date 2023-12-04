@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   protected readonly unsubscribe$ = new Subject<void>();
   constructor(private service: UsersApi) { }
   public user: User;
+  public placeholder_bio = 'Arma Virumque cano. Troia qui primus ab oris Italiam fato';
   ngOnInit(): void {
     this.service.getCurrent().subscribe((user) => {
       this.user = user;
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     const userId = this.user.userId;
 // tslint:disable-next-line:semicolon, no-console
     console.log(newBio);
+    // this.user.Bio = newBio;
     // db push here
     // this.service.updateUserBio(userId, newBio).subscribe(() => {
       // Handle any post-update logic

@@ -50,7 +50,7 @@ namespace Dashboard.Controllers
                     LastName = u.LastName,
                     Email = u.Email,
                     PhoneNumber = Convert.ToString(u.PhoneNumber),
-                    Bio = u.PhoneNumber
+                    //Bio = u.Bio
                 })
                 .ToList();
 

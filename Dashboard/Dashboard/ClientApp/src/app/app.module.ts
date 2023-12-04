@@ -29,6 +29,7 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig, protectedResources } from './auth-config';
 
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

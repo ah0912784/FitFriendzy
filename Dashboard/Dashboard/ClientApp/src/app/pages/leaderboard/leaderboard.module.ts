@@ -14,6 +14,7 @@ import {
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { LeaderboardComponent } from './leaderboard.component';
+import { CreateLeaderboardComponent } from './leaderboard/create-leaderboard/create-leaderboard.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { LeaderboardComponent } from './leaderboard.component';
   ],
   declarations: [
     LeaderboardComponent,
+    CreateLeaderboardComponent,
   ],
 })
 export class LeaderboardModule { }
