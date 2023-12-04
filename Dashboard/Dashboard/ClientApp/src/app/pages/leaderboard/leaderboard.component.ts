@@ -15,17 +15,29 @@ export class LeaderboardComponent implements OnInit {
   public group_membership: UserGroupMembership;
   constructor(private userService: UsersApi, private GroupsService: GroupsApi) { }
   // method for rankings by group
-  // 2) get other users within groups
-  // 3) sort users within each group
+  
+  
   // 4) send individual leader board to createleaderboard via ngFor in html template
 
   // method for rankings from all users and all groups
 
   // Other methods
   ngOnInit(): void {
-    // 1) get user groups
+    
+    
+    
+  }
+  // 1) get user groups
+  getGroupList() {
     const groupList = this.GroupsService.getAllGroupsByUserId(this.user.userId);
-  
+    return groupList;
+  }
+  // 2) get other users within groups
+  getUsersFromGroup(group_id: string) {
+    const userList = this.GroupsService.getAllUsersByGroupId(group_id);
+  }
+  // 3) sort users within each group
+  sortUsersByPoints() {
 
-}
+  }
 }
