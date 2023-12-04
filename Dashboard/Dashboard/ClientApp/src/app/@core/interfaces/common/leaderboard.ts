@@ -1,4 +1,4 @@
-export class LeaderBoard {
+export class Leaderboard {
   leaderBoardId: string;
-
+  groupId: string;
 }
