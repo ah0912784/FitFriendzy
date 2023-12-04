@@ -3,12 +3,19 @@
 public partial class Leaderboard
 {
     public Guid LeaderboardId { get; set; }
+    public Guid? GroupId { get; set; }
 
-    public Guid UserId { get; set; }
+    public virtual Group Group { get; set; } = null!;
+    public virtual ICollection<LeaderboardUserMembership> LeaderboardUserMemberships { get; set; } = new List<LeaderboardUserMembership>();
 
-    public double? TotalPointsEarned { get; set; }
-
-    public int? Position { get; set; }
-
-    public virtual User User { get; set; } = null!;
+    public LeaderboardUserMembership ToNewLeaderboardUserMembership(Guid? UserId)
+    {
+        return new LeaderboardUserMembership
+        {
+            MembershipId = Guid.NewGuid(),
+            LeaderboardId = LeaderboardId,
+            UserId = UserId,
+            Score = 0
+        };
+    }
 }

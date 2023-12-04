@@ -16,6 +16,8 @@ public partial class FitFriendzyDatabaseContext : DbContext
     public virtual DbSet<Group> Groups { get; set; }
 
     public virtual DbSet<Leaderboard> Leaderboards { get; set; }
+    
+    public virtual DbSet<LeaderboardUserMembership> LeaderboardUserMemberships { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -63,14 +65,35 @@ public partial class FitFriendzyDatabaseContext : DbContext
             entity.Property(e => e.LeaderboardId)
                 .ValueGeneratedNever()
                 .HasColumnName("leaderboard_id");
-            entity.Property(e => e.Position).HasColumnName("position");
-            entity.Property(e => e.TotalPointsEarned).HasColumnName("total_points_earned");
-            entity.Property(e => e.UserId).HasColumnName("user_id");
+            entity.Property(e => e.GroupId).HasColumnName("group_id");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Leaderboards)
+            entity.HasOne(d => d.Group)
+                .WithMany(p => p.Leaderboards)
+                .HasForeignKey(d => d.GroupId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Leaderboard_Group");
+        });
+
+        modelBuilder.Entity<LeaderboardUserMembership>(entity =>
+        {
+            entity.ToTable("LeaderboardUserMembership");
+
+            entity.Property(e => e.MembershipId)
+                .ValueGeneratedNever()
+                .HasColumnName("membership_id");
+            entity.Property(e => e.Leaderboard).HasColumnName("leaderboard_id");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+            entity.Property(e => e.Score).HasColumnName("score");
+
+            entity.HasOne(d => d.Leaderboard).WithMany(p => p.LeaderboardUserMemberships)
+                .HasForeignKey(d => d.LeaderboardId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_LeaderboardUserMembership_Leaderboard");
+
+            entity.HasOne(d => d.User).WithMany(p => p.LeaderboardUserMemberships)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Leaderboard_User");
+                .HasConstraintName("FK_LeaderboardUserMembership_User");
         });
 
         modelBuilder.Entity<User>(entity =>
