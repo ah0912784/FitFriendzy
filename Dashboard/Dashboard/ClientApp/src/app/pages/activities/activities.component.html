@@ -1,25 +1,36 @@
 <div class="row">
-  <div class="col-xxl-5">
-    <div class="row">
-      <div class="col-md-6">
-        Activities
-      </div>
-    </div>
+  <div class="col-md">
+    <nb-card size="small">
+      <nb-card-header>Enter Activity</nb-card-header>
+      <ngx-act-input></ngx-act-input>
+    </nb-card>
   </div>
-</div>
-
-<div class="row">
-  <div class="col">
-    <button nbButton status="primary" (click)="getActivity()" type="button">Get Activity</button>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xxl-9">
-    {{activity?.id}}
-  </div>
-
-  <div class="col-xxl-3">
-    {{activity?.type}}
+  <div class="col-md">
+    <nb-card>
+      <nb-card-header>Current Options</nb-card-header>
+      <nb-card-body>
+        <b>(Note: Currently only time-based activites are supported.)</b>
+        <br>Running - 10 Points per hour
+        <br>Jogging - 8 Points per hour
+        <br>Soccer - 8 Points per hour
+        <br>Basketball - 8 Points per hour
+        <br>Weightlifting - 7 Points per hour
+        <br>Football - 5 Points per hour
+        <br>Swimming - 3 Points per hour
+        <br>Walking - 2 Points per hour
+      </nb-card-body>
+    </nb-card>
+    <nb-card>
+      <nb-card-header>Suggest New Activites</nb-card-header>
+      <form id="activityForm" [formGroup]="activityForm">
+        <label for="activityName">Activity Name: </label>
+        <input nbInput type="text" id="activityName" name="activityName" formControlName="activityName" required>
+        <br>
+        <label for="pointsPerHour">Points per Hour: </label>
+        <input nbInput type="number" id="pointsPerHour" name="pointsPerHour" formControlName="pointsPerHour" required>
+        <br>
+        <button type="button" nbButton (click)="submitForm()" status="primary">Submit</button>
+      </form>
+    </nb-card>
   </div>
 </div>
