@@ -60,7 +60,7 @@ namespace Dashboard.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return BadRequest($"Failed to get group groups: {ex}");
+                    return BadRequest($"Failed to get other groups: {ex}");
                 }
             }
         }
@@ -94,7 +94,7 @@ namespace Dashboard.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return BadRequest($"Failed to get group groups for user: {userId}: {ex}");
+                    return BadRequest($"Failed to get groups for user: {userId}: {ex}");
                 }
             }
         }
@@ -166,7 +166,7 @@ namespace Dashboard.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return BadRequest($"Failed to get group groups for {userId}: {ex}");
+                    return BadRequest($"Failed to get group for {userId}: {ex}");
                 }
             }
         }
@@ -236,8 +236,11 @@ namespace Dashboard.Controllers
                     await context.UserGroupMemberships.AddAsync(userGroupMembership);
 
                     var leaderboard = GetGroupLeaderboardById(membership.GroupId);
-                    var leaderboardUserMembership = leaderboard.ToNewLeaderboardUserMembership(membership.UserId);
-                    await context.LeaderboardUserMemberships.AddAsync(leaderboardUserMembership);
+                    if(null != leaderboard)
+                    {
+                        var leaderboardUserMembership = leaderboard.ToNewLeaderboardUserMembership(membership.UserId);
+                        await context.LeaderboardUserMemberships.AddAsync(leaderboardUserMembership);
+                    }
 
                     var created = await context.SaveChangesAsync();
                     if (created > 0)

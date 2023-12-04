@@ -76,12 +76,13 @@ public partial class FitFriendzyDatabaseContext : DbContext
 
         modelBuilder.Entity<LeaderboardUserMembership>(entity =>
         {
+            entity.HasKey(e => e.MembershipId);
             entity.ToTable("LeaderboardUserMembership");
 
             entity.Property(e => e.MembershipId)
                 .ValueGeneratedNever()
                 .HasColumnName("membership_id");
-            entity.Property(e => e.Leaderboard).HasColumnName("leaderboard_id");
+            entity.Property(e => e.LeaderboardId).HasColumnName("leaderboard_id");
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.Score).HasColumnName("score");
 
