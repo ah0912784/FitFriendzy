@@ -1,116 +1,54 @@
 ﻿using Dashboard.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-
-// TODO: Leaderboard needs a group ID?
 
 namespace Dashboard.Controllers
 {
-    [Route("api/leaderboards")]
-    public class LeaderboardsController : BaseApiController
+    [Route("api/[controller]")]
+    [ApiController]
+    public class LeaderboardsController : ControllerBase
     {
-        // GET: api/leaderboards
+        // GET: api/<controller>/get/<groupId>
         [HttpGet]
-        public List<Leaderboard> Get()
+        [Route("get/entries/{groupId}")]
+        public async Task<IActionResult> GetEntriesByGroupId(Guid groupId)
         {
-            using (var context = new FitFriendzyDatabaseContext())
-            {
-                var leaderboards = context.Leaderboards.ToList();
-                return leaderboards;
-            }
-        }
-
-        // GET api/leaderboards/GUID
-        [HttpGet("{leaderboardGuid}")]
-        public Leaderboard Get(Guid leaderboardGuid)
-        {
-            using (var context = new FitFriendzyDatabaseContext())
-            {
-                var leaderboards = context.Leaderboards;
-                if (leaderboards.IsNullOrEmpty()) {
-                    return new Leaderboard();
-                }
-
-                var board = leaderboards.Find(leaderboardGuid);
-                
-                if (board == null) {
-                    return null;
-                }
-
-                return board;
-            }
-        }
-
-        // GET api/leaderboards/rank/1
-        //[HttpGet("rank/{position}")]
-        //public Leaderboard Get(int position)
-        //{
-        //    using (var context = new FitFriendzyDatabaseContext())
-        //    {
-        //        var leaderboards = context.Leaderboards;
-        //        if (leaderboards.IsNullOrEmpty()) {
-        //            return new Leaderboard();
-        //        }
-
-        //        var board = leaderboards.Where(board => board.Position == position).First();
-                
-        //        if (board == null) {
-        //            return null;
-        //        }
-
-        //        return board;
-        //    }
-        //}
-
-        // POST api/leaderboards
-        [HttpPost]
-        public IActionResult Post([FromBody] List<Leaderboard> leaderboards)
-        {
-            if (leaderboards == null || !leaderboards.Any())
-            {
-                return BadRequest("No leaderboards provided");
-            }
-
             using (var context = new FitFriendzyDatabaseContext())
             {
                 try
                 {
-                    int leaderboardCount = leaderboards.Count;
-
-                    context.Leaderboards.AddRange(leaderboards);
-                    context.SaveChanges();
-                    return Ok(String.Format("Created {0} leaderboards successfully.", leaderboardCount));
-                }
-                catch (Exception)
-                {
-                    return BadRequest("Failed to create leaderboards");
-                }
-            }
-        }
-
-        // PUT api/leaderboards/GUID
-        [HttpPut("{leaderboardGuid}")]
-        public async Task<IActionResult> Put(Guid leaderboardGuid, [FromBody] Leaderboard leaderboard)
-        {
-            using (var context = new FitFriendzyDatabaseContext())
-            {
-                try {
-                    var existingLeaderboard = context.Leaderboards.Find(leaderboardGuid);
-
-                    if (existingLeaderboard == null) {
-                        return BadRequest("Failed to find existing leaderboard with GUID: " + leaderboardGuid);
+                    if (Guid.Empty == groupId)
+                    {
+                        return BadRequest("Empty group id");
                     }
 
-                    context.Entry(existingLeaderboard).CurrentValues.SetValues(leaderboard);
-                    await context.SaveChangesAsync();
+                    var leaderboard = await context.Leaderboards
+                        .Include(l => l.LeaderboardUserMemberships)
+                        .ThenInclude(membership => membership.User)
+                        .FirstOrDefaultAsync(l => l.GroupId == groupId);
 
-                    return Ok(new {success = "Updated leaderboard: " + leaderboardGuid});
+                    if (leaderboard == null)
+                    {
+                        return NotFound("Leaderboard not found");
+                    }
+
+                    var leaderboardEntries = leaderboard.LeaderboardUserMemberships
+                        .OrderByDescending(membership => membership.Score)
+                        .Select((membership, index) => new LeaderboardEntry
+                        {
+                            Position = index + 1,
+                            User = membership.User,
+                            Score = membership.Score
+                        })
+                        .ToList();
+
+                    return Ok(leaderboardEntries);
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    return BadRequest("Failed to update existing leaderboard with GUID: " + leaderboardGuid);
+                    return BadRequest($"Failed to get leaderboard entries: {ex}");
                 }
-
             }
         }
 
