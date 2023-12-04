@@ -27,18 +27,19 @@
     </nb-card>
     <div class="col-md">
       <nb-card size="small">
-        <nb-card-header>To meet your goal, try:</nb-card-header>
-        <nb-list>
-          <nb-list-item>
-            <p>Running for 15 minutes + Bench Press for 4x4 at 75%</p>
-          </nb-list-item>
-          <nb-list-item>
-            <p>Back Squat for 4x6 at 75% + Stair Master for 10 minutes</p>
-          </nb-list-item>
-          <nb-list-item>
-            <p>Preacher Curls 4x10 at 50% + Sit-ups for 5x10</p>
-          </nb-list-item>
-        </nb-list>
+        <nb-card-header>Activity Suggestions For You</nb-card-header>
+        <nb-card-body>
+          <p>The most time efficent activites are:</p>
+          <p>Running (10 Points per hour!)</p>
+          <p>Jogging (8 Points per hour!)</p>
+        </nb-card-body>
+
+
+        <nb-card-body>The most popular activites are:<br><br>
+          <p *ngFor="let items of popular">
+            {{ items }}
+          </p>
+        </nb-card-body>
       </nb-card>
     </div>
   </div>

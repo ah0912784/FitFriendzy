@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'ngx-dashboard',
@@ -6,4 +6,10 @@ import {Component} from '@angular/core';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
+
+  // dummy data til db call
+  popular = ["Running", "Weightlifting"]
+
+  // db call for 2 most popular, put in popular array instead of line above
+
 }
