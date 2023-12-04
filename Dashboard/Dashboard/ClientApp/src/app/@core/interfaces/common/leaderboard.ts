@@ -1,10 +1,4 @@
-import { User } from './user';
-
-export class LeaderBoard {
+export class Leaderboard {
   leaderBoardId: string;
-  userId: string;
-  totalPointsEarned: number;
-  position: number;
-  user: User;
-
+  groupId: string;
 }

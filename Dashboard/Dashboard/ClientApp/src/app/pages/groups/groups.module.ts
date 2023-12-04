@@ -22,6 +22,7 @@ import { GroupsListComponent } from './groups-list/groups-list.component';
 import { GroupComponent } from './group/group.component';
 import { GroupsApi } from '../../@core/backend/common/api/groups.api';
 import { UsersApi } from '../../@core/backend/common/api/users.api';
+import { LeaderboardsApi } from '../../@core/backend/common/api/leaderboards.api';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { UsersApi } from '../../@core/backend/common/api/users.api';
   ],
   providers: [
     GroupsApi,
-    UsersApi
+    UsersApi,
+    LeaderboardsApi
   ]
 })
 export class GroupsModule { }

@@ -7,6 +7,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { UserGroupMembership } from '../../../@core/interfaces/common/userGroupMembership';
 import { NbToastrService } from '@nebular/theme';
+import { LeaderboardsApi } from '../../../@core/backend/common/api/leaderboards.api';
+import { LeaderboardEntry } from '../../../@core/interfaces/common/leaderboardEntry';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-group',
@@ -22,6 +25,8 @@ export class GroupComponent implements OnInit, OnDestroy {
   users: User[];
   currentUser: User;
 
+  leaderboardEntries: LeaderboardEntry[];
+
   userInGroup = false;
   loading = true;
 
@@ -29,7 +34,8 @@ export class GroupComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private apiService: GroupsApi,
     private userService: UsersApi,
-    private toastrService: NbToastrService,
+    private leaderboardService: LeaderboardsApi,
+    private toastrService: NbToastrService
   ) { }
 
   ngOnInit() {
@@ -37,6 +43,7 @@ export class GroupComponent implements OnInit, OnDestroy {
       this.groupId = params.get('groupId');
 
       this.loadGroupDetails(this.groupId);
+      this.loadLeaderboardDetails(this.groupId);
     });
   }
 
@@ -61,12 +68,21 @@ export class GroupComponent implements OnInit, OnDestroy {
     })
   }
 
+  loadLeaderboardDetails(groupId: string) {
+    this.leaderboardService.getEntriesByGroupId(groupId).pipe(
+      map(leaderboardEntries => leaderboardEntries.slice(0, 15))
+    )
+    .subscribe((leaderboardEntries) => {
+      this.leaderboardEntries = leaderboardEntries;
+    });
+  }
+
   joinGroup() {
     let membership: UserGroupMembership = {
       userId: this.currentUser.userId,
       groupId: this.group.groupId,
-      isAdmin: false,
-    };
+      isAdmin: false
+    }
 
     this.apiService.joinNewGroup(membership).subscribe(() => {
       this.loadGroupDetails(this.group.groupId);

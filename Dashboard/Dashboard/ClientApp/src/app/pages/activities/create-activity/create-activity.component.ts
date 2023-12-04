@@ -4,14 +4,14 @@ import { Observable, Subject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'ngx-home-input',
-  templateUrl: './home_input.component.html',
+  selector: 'ngx-create-activity',
+  templateUrl: './create-activity.component.html',
   styles: [`
     .form-group input {
       margin-left: 10px;
       margin-right: 10px;
     }
-    .home-input {
+    .create-activity {
       padding: 10px;
     }
   `]
@@ -25,7 +25,7 @@ import { map } from 'rxjs/operators';
 // Could not find changes to update in real time, but now when you submit there will be a final update
 // This means the ui may not be accurate until after you hit submit.
 
-export class HomeInputComponent implements OnInit, OnDestroy {
+export class CreateActivityComponent implements OnInit, OnDestroy {
   protected readonly destroying$ = new Subject<void>();
 
   options: string[];

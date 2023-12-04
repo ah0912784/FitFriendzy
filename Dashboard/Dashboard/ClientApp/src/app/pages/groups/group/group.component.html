@@ -3,9 +3,30 @@
              nbSpinnerSize="large"
              nbSpinnerMessage="">
   <nb-card-header>Welcome to {{group?.groupName}}! <button *ngIf="!userInGroup" nbButton style="float:right" status='info' (click)="joinGroup()">Join Group</button></nb-card-header>
-  <nb-list>
-    <nb-list-item *ngFor="let user of users">
-      <div>{{ user?.userDisplayName }}</div>
-    </nb-list-item>
-  </nb-list>
+
+  <div class="row">
+    <div class="col-md">
+      <nb-card>
+        <nb-card-header>Group Members:</nb-card-header>
+        <nb-list>
+          <nb-list-item *ngFor="let user of users">
+            <div>{{ user?.userDisplayName }}</div>
+          </nb-list-item>
+        </nb-list>
+      </nb-card>
+    </div>
+
+    <div class="col-md">
+      <nb-card>
+        <nb-card-header>Group Leaderboard:</nb-card-header>
+        <nb-list>
+          <nb-list-item *ngFor="let entry of leaderboardEntries">
+            <div>{{ entry?.position }}</div>
+            <div>{{ entry?.user.userDisplayName }}</div>
+            <div>{{ entry?.score }}</div>
+          </nb-list-item>
+        </nb-list>
+      </nb-card>
+    </div>
+  </div>
 </nb-card>

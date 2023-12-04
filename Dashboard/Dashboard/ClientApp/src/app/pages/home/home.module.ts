@@ -21,9 +21,10 @@ import { HomeComponent } from './home.component';
 import { HomeActivityComponent } from './home_activity_feed/home_activity.component';
 import { HomeNameComponent } from './home_name/home_name.component';
 import { HomeProgressComponent } from './home_progress/home_progress.component';
-import { HomeInputComponent } from './home_inputs/home_input.component';
+import { ActivitiesModule } from '../activities/activities.module';
 import { GroupsModule } from '../groups/groups.module';
 import { UserGoalsApi } from '../../@core/backend/common/api/usergoals.api';
+import { ActivitiesApi } from '../../@core/backend/common/api/activities.api';
 
 @NgModule({
   imports: [
@@ -45,16 +46,17 @@ import { UserGoalsApi } from '../../@core/backend/common/api/usergoals.api';
     NbInputModule,
     GroupsModule,
     NbCalendarModule,
+    ActivitiesModule
   ],
   declarations: [
     HomeComponent,
     HomeActivityComponent,
     HomeNameComponent,
-    HomeProgressComponent,
-    HomeInputComponent
+    HomeProgressComponent
   ],
   providers: [
-    UserGoalsApi
+    UserGoalsApi,
+    ActivitiesApi
   ]
 })
 export class HomeModule { }
