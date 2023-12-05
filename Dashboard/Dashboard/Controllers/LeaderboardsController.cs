@@ -1,6 +1,7 @@
 ﻿using Dashboard.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Dashboard.Controllers
@@ -14,18 +15,17 @@ namespace Dashboard.Controllers
         [Route("get/entries/{groupId}")]
         public async Task<IActionResult> GetEntriesByGroupId(Guid groupId)
         {
-            using (var context = new FitFriendzyDatabaseContext())
+            try
             {
-                try
+                if (Guid.Empty == groupId)
                 {
-                    if (Guid.Empty == groupId)
-                    {
-                        return BadRequest("Empty group id");
-                    }
+                    return BadRequest("Empty group id");
+                }
 
+                using (var context = new FitFriendzyDatabaseContext())
+                {
+                    var retval = new List<LeaderboardEntry>();
                     var leaderboard = await context.Leaderboards
-                        .Include(l => l.LeaderboardUserMemberships)
-                        .ThenInclude(membership => membership.User)
                         .FirstOrDefaultAsync(l => l.GroupId == groupId);
 
                     if (leaderboard == null)
@@ -33,22 +33,28 @@ namespace Dashboard.Controllers
                         return NotFound("Leaderboard not found");
                     }
 
-                    var leaderboardEntries = leaderboard.LeaderboardUserMemberships
+                    var leaderboardUserMemberships = await context.LeaderboardUserMemberships
+                        .Where(membership => membership.LeaderboardId == leaderboard.LeaderboardId)
                         .OrderByDescending(membership => membership.Score)
-                        .Select((membership, index) => new LeaderboardEntry
-                        {
-                            Position = index + 1,
-                            User = membership.User,
-                            Score = membership.Score
-                        })
-                        .ToList();
+                        .ToListAsync();
 
-                    return Ok(leaderboardEntries);
+                    var index = 1;
+                    leaderboardUserMemberships.ForEach((membership) =>
+                    {
+                        retval.Add(new LeaderboardEntry
+                        {
+                            Position = index++,
+                            UserName = membership.UserName,
+                            Score = membership.Score,
+                        });
+                    });
+
+                    return Ok(retval);
                 }
-                catch (Exception ex)
-                {
-                    return BadRequest($"Failed to get leaderboard entries: {ex}");
-                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Failed to get leaderboard entries. EX: " + ex);
             }
         }
 

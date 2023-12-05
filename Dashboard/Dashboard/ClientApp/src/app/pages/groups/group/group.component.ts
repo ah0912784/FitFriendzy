@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-group',
-  // styleUrls: ['./groups-list.component.scss'],
+  styleUrls: ['./group.component.scss'],
   templateUrl: './group.component.html',
 })
 
@@ -69,12 +69,17 @@ export class GroupComponent implements OnInit, OnDestroy {
   }
 
   loadLeaderboardDetails(groupId: string) {
+    console.log("groupId", groupId);
     this.leaderboardService.getEntriesByGroupId(groupId).pipe(
       map(leaderboardEntries => leaderboardEntries.slice(0, 15))
     )
-    .subscribe((leaderboardEntries) => {
+      .subscribe((leaderboardEntries) => {
+        console.log(leaderboardEntries);
       this.leaderboardEntries = leaderboardEntries;
-    });
+    },
+      err => {
+        console.log(err);
+      });
   }
 
   joinGroup() {

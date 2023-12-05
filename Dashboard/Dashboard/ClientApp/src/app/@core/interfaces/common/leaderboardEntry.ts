@@ -1,7 +1,5 @@
-import { User } from "./user";
-
 export class LeaderboardEntry {
   position: number;
-  user: User;
+  userName: string;
   score: number;
 }
