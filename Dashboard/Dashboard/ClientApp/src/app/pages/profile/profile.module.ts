@@ -12,6 +12,8 @@ import {
 import { ThemeModule } from '../../@theme/theme.module';
 import { UsersApi } from '../../@core/backend/common/api/users.api';
 import { ProfileComponent } from './profile.component';
+import { ProfileBioComponent } from './profile-bio/profile-bio.component';
+import { BioEditComponent } from './bio-edit/bio-edit.component';
 
 @NgModule({
   imports: [
@@ -27,6 +29,8 @@ import { ProfileComponent } from './profile.component';
   ],
   declarations: [
     ProfileComponent,
+    ProfileBioComponent,
+    BioEditComponent,
   ],
   providers: [
     UsersApi,

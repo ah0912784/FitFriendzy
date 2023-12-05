@@ -5,16 +5,16 @@ import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ngx-profile',
-  templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
+  templateUrl: './profile.component.html',
+
 })
-export class ProfileComponent implements OnInit, OnDestroy  {
+export class ProfileComponent implements OnInit, OnDestroy {
   private alive = true;
   protected readonly unsubscribe$ = new Subject<void>();
   constructor(private service: UsersApi) { }
-
   public user: User;
-
+  public placeholder_bio = 'Arma Virumque cano. Troia qui primus ab oris Italiam fato';
   ngOnInit(): void {
     this.service.getCurrent().subscribe((user) => {
       this.user = user;
@@ -25,5 +25,18 @@ export class ProfileComponent implements OnInit, OnDestroy  {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
     this.alive = false;
+  }
+  // Function to update the bio of the user
+  updateBio(newBio: string): void {
+    // Assuming UserDto has a property named 'id'
+    const userId = this.user.userId;
+// tslint:disable-next-line:semicolon, no-console
+    console.log(newBio);
+    // this.user.Bio = newBio;
+    // db push here
+    // this.service.updateUserBio(userId, newBio).subscribe(() => {
+      // Handle any post-update logic
+      // Reload the user or update the user's bio directly
+    // });
   }
 }

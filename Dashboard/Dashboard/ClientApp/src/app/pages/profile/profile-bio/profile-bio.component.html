@@ -1,0 +1,17 @@
+<nb-card>
+  <nb-card-header>
+    {{ name }}'s Bio
+  </nb-card-header>
+
+  <nb-card-body>
+    <ngx-bio-edit *ngIf="isEditing; else elseBlock"></ngx-bio-edit>
+    <textarea #elseBlock>
+       {{ bio }}
+    </textarea>
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton>
+      <nb-icon nbPrefix icon="edit-2-outline" , onclick="toggleEditMode()"></nb-icon>
+    </button>
+  </nb-card-footer>
+</nb-card>

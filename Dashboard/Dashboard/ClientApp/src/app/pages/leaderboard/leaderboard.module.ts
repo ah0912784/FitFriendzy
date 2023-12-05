@@ -10,10 +10,12 @@ import {
   NbButtonModule,
   NbCardModule,
   NbIconModule,
+  NbLayoutModule,
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { LeaderboardComponent } from './leaderboard.component';
+import { CreateLeaderboardComponent } from './leaderboard/create-leaderboard/create-leaderboard.component';
 
 @NgModule({
   imports: [
@@ -29,9 +31,11 @@ import { LeaderboardComponent } from './leaderboard.component';
     NbSpinnerModule,
     NbIconModule,
     NbButtonModule,
+    NbLayoutModule,
   ],
   declarations: [
     LeaderboardComponent,
+    CreateLeaderboardComponent,
   ],
 })
 export class LeaderboardModule { }

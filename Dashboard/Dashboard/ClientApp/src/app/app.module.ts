@@ -28,7 +28,7 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 // Import the Azure AD B2C configuration
 import { msalConfig, protectedResources } from './auth-config';
 
-/* Changes end here. */
+
 
 @NgModule({
   declarations: [AppComponent],
