@@ -16,7 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     }
   `]
 })
-export class ActivitiesComponent implements OnInit, OnDestroy {
+export class ActivitiesComponent implements OnDestroy {
   private alive = true;
   protected readonly unsubscribe$ = new Subject<void>();
   activityForm: FormGroup;
@@ -33,9 +33,6 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
     const pointsPerHour = this.activityForm.value.pointsPerHour
     alert(`Suggestion Received! Activity: ${activityName}, Points per Hour: ${pointsPerHour}`)
     // If you want to add a suggestions DB connection, it can easily be added here where the vars are grabbed
-  }
-
-  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
