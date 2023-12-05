@@ -3,6 +3,7 @@ using Dashboard.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using System.Text.RegularExpressions;
 
 namespace Dashboard.Controllers
 {
@@ -198,7 +199,11 @@ namespace Dashboard.Controllers
                     };
                     await context.Leaderboards.AddAsync(leaderboard);
 
-                    var leaderboardUserMembership = leaderboard.ToNewLeaderboardUserMembership(group.GroupLeaderId);
+                    var userDisplayName = await context.Users
+                        .Where(u => u.UserId == group.GroupLeaderId)
+                        .Select(u => u.UserDisplayName).FirstOrDefaultAsync();
+
+                    var leaderboardUserMembership = leaderboard.ToNewLeaderboardUserMembership(group.GroupLeaderId, userDisplayName);
                     await context.LeaderboardUserMemberships.AddAsync(leaderboardUserMembership);
 
                     var created = await context.SaveChangesAsync();
@@ -238,7 +243,11 @@ namespace Dashboard.Controllers
                     var leaderboard = GetGroupLeaderboardById(membership.GroupId);
                     if(null != leaderboard)
                     {
-                        var leaderboardUserMembership = leaderboard.ToNewLeaderboardUserMembership(membership.UserId);
+                        var userDisplayName = await context.Users
+                            .Where(u => u.UserId == userGroupMembership.UserId)
+                            .Select(u => u.UserDisplayName).FirstOrDefaultAsync();
+
+                        var leaderboardUserMembership = leaderboard.ToNewLeaderboardUserMembership(membership.UserId, userDisplayName);
                         await context.LeaderboardUserMemberships.AddAsync(leaderboardUserMembership);
                     }
 

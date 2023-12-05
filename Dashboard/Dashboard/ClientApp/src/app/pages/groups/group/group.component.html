@@ -6,24 +6,27 @@
 
   <div class="row">
     <div class="col-md">
-      <nb-card>
+      <nb-card class="group-card">
         <nb-card-header>Group Members:</nb-card-header>
         <nb-list>
           <nb-list-item *ngFor="let user of users">
-            <div>{{ user?.userDisplayName }}</div>
+            <nb-user shape="semi-round" [name]="user?.userDisplayName" [title]="user?.userName">
+            </nb-user>
           </nb-list-item>
         </nb-list>
       </nb-card>
     </div>
 
     <div class="col-md">
-      <nb-card>
+      <nb-card class="group-card">
         <nb-card-header>Group Leaderboard:</nb-card-header>
         <nb-list>
           <nb-list-item *ngFor="let entry of leaderboardEntries">
-            <div>{{ entry?.position }}</div>
-            <div>{{ entry?.user.userDisplayName }}</div>
-            <div>{{ entry?.score }}</div>
+            <nb-user shape="semi-round" [name]="entry?.userName" [title]="entry?.score">
+            </nb-user>
+            <div class="place-marker">
+              <nb-icon icon="award-outline" status="warning"></nb-icon>{{ entry?.position | ordinalSuffix }} Place
+            </div>
           </nb-list-item>
         </nb-list>
       </nb-card>

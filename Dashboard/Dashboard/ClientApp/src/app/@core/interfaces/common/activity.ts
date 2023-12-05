@@ -1,5 +1,6 @@
 export class Activity {
-  id: number;
-  type: string;
+  userId: string;
+  activityType: string;
+  duration: number;
   pointsEarned: number;
 }

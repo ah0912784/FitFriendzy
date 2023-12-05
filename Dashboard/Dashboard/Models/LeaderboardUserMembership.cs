@@ -8,7 +8,9 @@
 
         public Guid? UserId { get; set; }
 
-        public float? Score {  get; set; }
+        public string UserName { get; set; } = null!;
+
+        public decimal? Score {  get; set; }
 
         public virtual Leaderboard Leaderboard { get; set; } = null!;
 

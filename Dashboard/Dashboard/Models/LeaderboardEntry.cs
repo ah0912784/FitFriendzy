@@ -3,7 +3,7 @@
     public class LeaderboardEntry
     {
         public int Position { get; set; }
-        public User User { get; set; } = null!;
-        public float? Score { get; set; }
+        public string UserName { get; set; } = null!;
+        public decimal? Score { get; set; }
     }
 }

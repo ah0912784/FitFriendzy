@@ -2,6 +2,11 @@ import { ChangeDetectionStrategy, Component, ViewChild, OnInit, OnDestroy } from
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Activity } from '../../../@core/interfaces/common/activity';
+import { UsersApi } from '../../../@core/backend/common/api/users.api';
+import { User } from '../../../@core/interfaces/common/user';
+import { ActivitiesApi } from '../../../@core/backend/common/api/activities.api';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-create-activity',
@@ -14,7 +19,8 @@ import { map } from 'rxjs/operators';
     .create-activity {
       padding: 10px;
     }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 
@@ -34,15 +40,27 @@ export class CreateActivityComponent implements OnInit, OnDestroy {
 
   inputForm: FormGroup;
 
+  activity: Activity;
+  user: User;
+
   @ViewChild('autoInput') input;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private userService: UsersApi,
+    private apiService: ActivitiesApi,
+    private toastrService: NbToastrService) { }
 
   ngOnInit() {
+    this.userService.getCurrent().subscribe((user) => {
+      this.user = user;
+    })
 
     // Our current list of exercises. Looks ugly but it works :)
-    this.options = ['Running', 'Jogging', 'Soccer', 'Basketball', 'Weightlifting', 'Football', 'Swimming', 'Walking'];
-    this.points = { 'Running': 10, 'Jogging': 8, 'Soccer': 8, 'Basketball': 8, 'Weightlifting': 7, 'Football': 5, 'Swimming': 3, 'Walking': 2 };
+    this.options = ['Running', 'Jogging', 'Soccer', 'Basketball', 'Weightlifting', 'Football', 'Swimming', 'Walking', 'Golf'];
+    this.points = {
+      'Running': 10, 'Jogging': 8, 'Soccer': 8, 'Basketball': 8, 'Weightlifting': 7,
+      'Football': 5, 'Golf': 3, 'Swimming': 3, 'Walking': 2
+    };
     this.filteredOptions$ = of(this.options);
 
     this.inputForm = this.fb.group({
@@ -101,16 +119,38 @@ export class CreateActivityComponent implements OnInit, OnDestroy {
     if (this.inputForm.valid) {
       // Do a last update to ensure points are accurate
       this.updatePoints();
-
-      // Currently it logs for debugging/testing
-      // Code here should be changed to push activity to database
-      // Start of activity push --
       console.log(`Activity: ${this.inputForm.value.activity}, Duration: ${this.inputForm.value.duration}, Points: ${this.inputForm.value.points}`);
-      // End of activity push   --
+      this.activity = this.toPersistedModel(this.inputForm.value);
+      this.apiService.addActivity(this.activity).subscribe(() => {
+        this.handleSuccessResponse('success');
+      },
+      err => {
+        this.handleWrongResponse(err);
+      });
+
     } else {
       console.log("Please select an activity and provide a duration.");
     }
   }
+
+  toPersistedModel(value: any): Activity {
+    let retval: Activity = {
+      userId: this.user.userId ? this.user.userId : '',
+      activityType: value.activity ? value.activity : '',
+      duration: value.duration ? value.duration : 0,
+      pointsEarned: value.points ? value.points : 0
+    }
+    return retval;
+  }
+
+  handleSuccessResponse(status: any) {
+    this.toastrService.success(status, `Successfully added new user!`);
+  }
+
+  handleWrongResponse(err: any) {
+    this.toastrService.danger(err, 'Something went wrong!');
+  }
+
   ngOnDestroy(): void {
     this.destroying$.next();
     this.destroying$.complete();

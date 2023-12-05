@@ -61,12 +61,12 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   convertToUser(value: any): User {
-    const entity = this.getPersistedModel(value);
+    const entity = this.toPersistedModel(value);
 
     return entity;
   }
 
-  getPersistedModel(value: any): User {
+  toPersistedModel(value: any): User {
     let retval: User = {
       userId: value.userId ? value.userId : null,
       firstName: value.firstName ? value.firstName : "",
@@ -107,66 +107,5 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.destroying$.next();
     this.destroying$.complete();
   }
-
-  // customColumn = 'userId';
-  // defaultColumns = ['userDisplayName', 'userName', 'password', 'firstName', 'lastName', 'email', 'phoneNumber'];
-  // allColumns = [this.customColumn, ...this.defaultColumns];
-
-  // dataSource: NbTreeGridDataSource<any>;
-
-  // sortColumn: string = '';
-  // sortDirection: NbSortDirection = NbSortDirection.NONE;
-
-  // changeSort(sortRequest: NbSortRequest): void {
-  //  this.dataSource.sort(sortRequest);
-  //  this.sortColumn = sortRequest.column;
-  //  this.sortDirection = sortRequest.direction;
-  // }
-
-  // getDirection(column: string): NbSortDirection {
-  //  if (column === this.sortColumn) {
-  //    return this.sortDirection;
-  //  }
-  //  return NbSortDirection.NONE;
-  // }
-
-  // private data: TreeNode<User>[] = [
-  //  {
-  //    data: {
-  //      userId: "000-00000-00001",
-  //      userDisplayName: "Leanne Graham",
-  //      userName: "JohnDoe22",
-  //      password: "testing124",
-  //      firstName: "John",
-  //      lastName: "Doe",
-  //      email: "test@gmail.com",
-  //      phoneNumber: "1234567890"
-  //    }
-  //  },
-  //  {
-  //    data: {
-  //      userId: "000-00000-00002",
-  //      userDisplayName: "Leanne Graham",
-  //      userName: "JohnDoe22",
-  //      password: "LEAnneG11",
-  //      firstName: "John",
-  //      lastName: "Doe",
-  //      email: "test@gmail.com",
-  //      phoneNumber: "1234567890"
-  //    },
-  //  },
-  //  {
-  //    data: {
-  //      userId: "000-00000-00003",
-  //      userDisplayName: "Leanne Graham",
-  //      userName: "JohnDoe22",
-  //      password: "OpsINeedHelp",
-  //      firstName: "John",
-  //      lastName: "Doe",
-  //      email: "test@gmail.com",
-  //      phoneNumber: "1234567890"
-  //    }
-  //  }
-  // ];
 }
 

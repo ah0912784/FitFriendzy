@@ -1,11 +1,13 @@
 ﻿using Dashboard.Models;
+using Dashboard.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dashboard.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class ActivitiesController : ControllerBase
     {
         private readonly ILogger<ActivitiesController> log;
@@ -15,23 +17,46 @@ namespace Dashboard.Controllers
             this.log = log;
         }
 
-
-        [HttpGet]
-        [Route("[action]/{activityId:int}")]
-        //[Authorize]
-        public IActionResult GetActivity(int activityId)
+        // POST api/<ActivitiesController>/add/new
+        [HttpPost]
+        [Route("add/new")]
+        public async Task<IActionResult> CreateNewUser(UserActivityDto newActivity)
         {
-            // In a real application, you would fetch the 'Activity' from your data source
-            // For demonstration purposes, we'll create a sample 'Activity' object
-            
-            var activity = new Activity
+            if (newActivity == null)
             {
-                Id = activityId,
-                Type = "Running",
-                // Set other properties as needed
-            };
+                return BadRequest("No activity info provided");
+            }
 
-            return Ok(activity); // Returns a 200 OK response with the 'Activity' object
+            using (var context = new FitFriendzyDatabaseContext())
+            {
+                try
+                {
+                    var activity = newActivity.ToPersisted();
+                    activity.ActivityId = Guid.NewGuid();
+
+                    // Add new activity
+                    await context.UserActivities.AddAsync(activity);
+
+                    // Fetch leaderboardUserMemberships and update scores
+                    var leaderboardUserMemberships = await context.LeaderboardUserMemberships
+                        .Where(l => l.UserId == activity.UserId)
+                        .ToListAsync();
+
+                    foreach (var membership in leaderboardUserMemberships)
+                    {
+                        membership.Score += activity.PointsEarned;
+                        context.Entry(membership).State = EntityState.Modified;
+                    }
+
+                    await context.SaveChangesAsync();
+
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Failed to add activity: {ex}");
+                }
+            }
         }
     }
 }

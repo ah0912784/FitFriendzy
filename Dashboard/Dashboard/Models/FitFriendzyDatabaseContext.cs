@@ -85,6 +85,7 @@ public partial class FitFriendzyDatabaseContext : DbContext
             entity.Property(e => e.LeaderboardId).HasColumnName("leaderboard_id");
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.Score).HasColumnName("score");
+            entity.Property(e => e.UserName).HasColumnName("user_name");
 
             entity.HasOne(d => d.Leaderboard).WithMany(p => p.LeaderboardUserMemberships)
                 .HasForeignKey(d => d.LeaderboardId)
