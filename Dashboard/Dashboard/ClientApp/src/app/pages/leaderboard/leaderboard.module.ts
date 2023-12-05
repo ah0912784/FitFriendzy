@@ -10,6 +10,7 @@ import {
   NbButtonModule,
   NbCardModule,
   NbIconModule,
+  NbLayoutModule,
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -30,6 +31,7 @@ import { CreateLeaderboardComponent } from './leaderboard/create-leaderboard/cre
     NbSpinnerModule,
     NbIconModule,
     NbButtonModule,
+    NbLayoutModule,
   ],
   declarations: [
     LeaderboardComponent,

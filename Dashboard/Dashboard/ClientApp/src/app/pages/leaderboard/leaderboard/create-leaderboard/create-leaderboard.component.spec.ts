@@ -8,7 +8,7 @@ describe('CreateLeaderboardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CreateLeaderboardComponent]
+      declarations: [CreateLeaderboardComponent],
     });
     fixture = TestBed.createComponent(CreateLeaderboardComponent);
     component = fixture.componentInstance;

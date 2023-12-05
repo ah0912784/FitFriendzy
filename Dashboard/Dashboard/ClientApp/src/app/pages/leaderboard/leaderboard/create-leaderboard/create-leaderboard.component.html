@@ -1,7 +1,7 @@
 <nb-card size ="medium">
-  <nb-card-header>Groupx Leader Board</nb-card-header>
+  <nb-card-header>{{ name }}'s Leader Board</nb-card-header>
   <nb-list>
     <!-- Add in ngFor to iterate through members and create leader board -->
-    <nb-list-item></nb-list-item>
+    <nb-list-item *ngFor="board of leaderboard">{{board.position}} {{board.name}}  {{board.score}}</nb-list-item>
   </nb-list>
 </nb-card>
