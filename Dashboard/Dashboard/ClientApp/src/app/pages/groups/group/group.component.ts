@@ -7,10 +7,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { UserGroupMembership } from '../../../@core/interfaces/common/userGroupMembership';
 import { NbToastrService } from '@nebular/theme';
+import { LeaderboardsApi } from '../../../@core/backend/common/api/leaderboards.api';
+import { LeaderboardEntry } from '../../../@core/interfaces/common/leaderboardEntry';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-group',
-  // styleUrls: ['./groups-list.component.scss'],
+  styleUrls: ['./group.component.scss'],
   templateUrl: './group.component.html',
 })
 
@@ -22,6 +25,8 @@ export class GroupComponent implements OnInit, OnDestroy {
   users: User[];
   currentUser: User;
 
+  leaderboardEntries: LeaderboardEntry[];
+
   userInGroup = false;
   loading = true;
 
@@ -29,6 +34,7 @@ export class GroupComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private apiService: GroupsApi,
     private userService: UsersApi,
+    private leaderboardService: LeaderboardsApi,
     private toastrService: NbToastrService
   ) { }
 
@@ -37,6 +43,7 @@ export class GroupComponent implements OnInit, OnDestroy {
       this.groupId = params.get('groupId');
 
       this.loadGroupDetails(this.groupId);
+      this.loadLeaderboardDetails(this.groupId);
     });
   }
 
@@ -61,12 +68,26 @@ export class GroupComponent implements OnInit, OnDestroy {
     })
   }
 
+  loadLeaderboardDetails(groupId: string) {
+    console.log("groupId", groupId);
+    this.leaderboardService.getEntriesByGroupId(groupId).pipe(
+      map(leaderboardEntries => leaderboardEntries.slice(0, 15))
+    )
+      .subscribe((leaderboardEntries) => {
+        console.log(leaderboardEntries);
+      this.leaderboardEntries = leaderboardEntries;
+    },
+      err => {
+        console.log(err);
+      });
+  }
+
   joinGroup() {
     let membership: UserGroupMembership = {
       userId: this.currentUser.userId,
       groupId: this.group.groupId,
-      isAdmin: false
-    }
+      isAdmin: false,
+    };
 
     this.apiService.joinNewGroup(membership).subscribe(() => {
       this.loadGroupDetails(this.group.groupId);

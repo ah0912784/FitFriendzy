@@ -9,8 +9,7 @@ import {
 import { ActivitiesApi } from '../../@core/backend/common/api/activities.api';
 import { ThemeModule } from '../../@theme/theme.module';
 import { ActivitiesComponent } from './activities.component';
-import { HomeModule } from '../home/home.module';
-import { ActivitiesInputComponent } from './activites_input/home_inputs/activites_input.component';
+import { CreateActivityComponent } from './create-activity/create-activity.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NbAutocompleteModule } from '@nebular/theme';
 
@@ -20,18 +19,20 @@ import { NbAutocompleteModule } from '@nebular/theme';
     NbCardModule,
     NbButtonModule,
     NbIconModule,
-    HomeModule,
     NbProgressBarModule,
     NbInputModule,
     ReactiveFormsModule,
     NbAutocompleteModule,
   ],
+  exports: [
+    CreateActivityComponent
+  ],
   declarations: [
     ActivitiesComponent,
-    ActivitiesInputComponent,
+    CreateActivityComponent,
   ],
   providers: [
-    // ActivitiesApi
+    ActivitiesApi
   ],
 })
 export class ActivitiesModule { }

@@ -17,7 +17,7 @@ import { GroupDataService } from '../../../@core/backend/common/services/group.s
 export class GroupsListComponent implements OnInit, OnDestroy {
   @Input() public: boolean = false;
 
-  user: User
+  user: User;
   groups: Group[];
 
   receivedData: any;

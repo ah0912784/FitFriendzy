@@ -1,6 +1,5 @@
 <nb-layout>
-  <nb-layout-header><h3>{{user?.firstName }} {{user?.lastName }}'s Profile</h3></nb-layout-header>
-  <h3>{{user?.firstName}} {{user?.lastName}}'s Profile</h3>
+  <nb-layout-header><h3>{{user?.userDisplayName }}'s Profile</h3></nb-layout-header>
   <nb-layout-column>
     <!-- Contact Info -->
     <nb-card size="tiny">
@@ -10,7 +9,7 @@
       <nb-list>
         <nb-list-item>
           Email: {{user?.email}}
-         <button nbButton size ="tiny"><nb-icon icon="edit-2-outline"></nb-icon></button>
+          <button nbButton size="tiny"><nb-icon icon="edit-2-outline"></nb-icon></button>
         </nb-list-item>
         <nb-list-item>
           Phone number: {{user?.phoneNumber}}
@@ -19,15 +18,8 @@
       </nb-list>
     </nb-card>
     <!-- Biography Card -->
-   
-    <nb-card>
-      <nb-card-header>
-        Bio
-      </nb-card-header>
-      <nb-card-body>
-        Arma virumque cano. Troiae qui primus ab oris italiam fato.
-      </nb-card-body>
-    </nb-card>
+    <!--<ngx-profile-bio [name]="user?.userDisplayName" [bio]="placeholder_bio"></ngx-profile-bio>-->
+    <!--user?.Bio-->
   </nb-layout-column>
      
   <!-- Right Column -->

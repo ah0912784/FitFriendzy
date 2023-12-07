@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ActivitiesApi } from '../../@core/backend/common/api/activities.api';
-import { Activity } from '../../@core/interfaces/common/activity';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -17,9 +16,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     }
   `]
 })
-export class ActivitiesComponent implements OnInit, OnDestroy {
+export class ActivitiesComponent implements OnDestroy {
   private alive = true;
-  public activity: Activity;
   protected readonly unsubscribe$ = new Subject<void>();
   activityForm: FormGroup;
 
@@ -35,18 +33,6 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
     const pointsPerHour = this.activityForm.value.pointsPerHour
     alert(`Suggestion Received! Activity: ${activityName}, Points per Hour: ${pointsPerHour}`)
     // If you want to add a suggestions DB connection, it can easily be added here where the vars are grabbed
-  }
-
-  ngOnInit(): void {
-    this.service.getActivity(1234).subscribe((activity) => {
-      this.activity = activity;
-    });
-  }
-
-  getActivity(): void {
-    this.service.getActivity(1290).subscribe((activity) => {
-      this.activity = activity;
-    });
   }
 
   ngOnDestroy(): void {

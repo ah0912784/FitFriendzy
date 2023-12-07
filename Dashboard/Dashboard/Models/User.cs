@@ -23,6 +23,9 @@ namespace Dashboard.Models
         public string PhoneNumber { get; set; }
 
         public virtual ICollection<LeaderboardUserMembership> LeaderboardUserMemberships { get; set; } = new List<LeaderboardUserMembership>();
+        //public string Bio {get; set; }
+
+        
 
         public virtual ICollection<UserActivity> UserActivities { get; set; } = new List<UserActivity>();
 

@@ -9,11 +9,11 @@ import { Activity } from '../../../interfaces/common/activity';
 export class ActivitiesApi {
     private readonly apiController: string = 'activities';
 
-    constructor(private http: HttpService) { }
+  constructor(private http: HttpService) { }
 
-    // get(activityId: any): Observable<any> {
-    //   return this.http.get(`${this.apiController}/GetActivity/${activityId}`);
-    // }
+  addActivity(activity: Activity): Observable<any> {
+    return this.http.post(`${this.apiController}/add/new`, activity);
+  }
 
   getActivity(activityId: any): Observable<Activity> {
     return this.http.get(`${this.apiController}/getactivity/${activityId}`);

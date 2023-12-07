@@ -13,15 +13,15 @@ namespace Dashboard.Controllers
 
         // implement getting info from db as the activity repository
 
-        public async Task<Activity> GetActivity(string activityId)
-        {
-            // Simulate getting an activity from the database for testing purposes
-            Activity defaultActivity = new Activity { Id = 1234567, Type = "Running" };
+        //public async Task<UserActivity> GetActivity(string activityId)
+        //{
+        //    // Simulate getting an activity from the database for testing purposes
+        //    Activity defaultActivity = new Activity { Id = 1234567, Type = "Running" };
 
-            // Return the default activity as a completed task
-            return await Task.FromResult(defaultActivity);
+        //    // Return the default activity as a completed task
+        //    return await Task.FromResult(defaultActivity);
 
-            //return await activityRepository.ReadyActivityById(activityId);
-        }
+        //    //return await activityRepository.ReadyActivityById(activityId);
+        //}
     }
 }

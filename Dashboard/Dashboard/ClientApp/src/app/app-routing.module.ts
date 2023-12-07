@@ -21,7 +21,7 @@ export const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     initialNavigation: 'enabledNonBlocking',
-    useHash: false
+    useHash: false,
   })],
   exports: [RouterModule],
 })
