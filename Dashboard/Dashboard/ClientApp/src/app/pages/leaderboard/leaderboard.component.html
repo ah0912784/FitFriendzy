@@ -1,20 +1,30 @@
 <!-- Basic layout / ideas -->
 
-  <h3>Leaderboards</h3>
 
-<!-- Use *ngFor to iterate over leaderboardEntries if needed -->
-<!-- *ngFor="let leaderboard of leaderboardEntries; let i=index"
-  *ngFor"let g of groups" -->
-<div class="card-row">
-  <div class="card-col" *ngFor="let g of groups; let i=index">
-    <nb-card [size]="medium">
-      <nb-card-header>{{g.groupName}}</nb-card-header>
-      <nb-card-body>
-        <ngx-create-leaderboard [gId] ="g.groupId" ></ngx-create-leaderboard>
-      </nb-card-body>
-    </nb-card>
-  </div>
-</div>
+
+<nb-layout [withScroll] ="false">
+ <nb-layout-header><h2>Leaderboards</h2></nb-layout-header>
+  <nb-layout-column *ngFor="let g of groups; let i=index">
+    <ng-container *ngIf="groups.length > 1; else singleGroup">
+      <nb-card [size]="'large'" class="group-card" [ngClass]="{'col-12': true}">
+        <nb-card-header>{{ g.groupName }}</nb-card-header>
+        <nb-card-body>
+          <ngx-create-leaderboard [gId]="g.groupId"></ngx-create-leaderboard>
+        </nb-card-body>
+      </nb-card>
+    </ng-container>
+    <ng-template #singleGroup>
+      <nb-card [size]="'large'" class="group-card" [ngClass]="{'col-12': true}">
+        <nb-card-header>{{ g.groupName }}</nb-card-header>
+        <nb-card-body>
+          <ngx-create-leaderboard [gId]="g.groupId"></ngx-create-leaderboard>
+        </nb-card-body>
+      </nb-card>
+    </ng-template>
+  </nb-layout-column>
+</nb-layout>
+
+
 
 
 

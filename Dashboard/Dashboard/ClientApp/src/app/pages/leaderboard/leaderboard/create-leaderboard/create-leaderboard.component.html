@@ -1,5 +1,9 @@
 <nb-list>
   <nb-list-item *ngFor="let entry of leaderboardEntries;">
-    {{entry.rank}}    {{entry.userName}}     {{entry.score}}
+    <nb-user shape="semi-round" [name]="entry?.userName" [title]="entry?.score">
+    </nb-user>
+    <div class="place-marker">
+      <nb-icon icon="award-outline" status="warning"></nb-icon>{{ entry?.position | ordinalSuffix }} Place
+    </div>
   </nb-list-item>
 </nb-list>
