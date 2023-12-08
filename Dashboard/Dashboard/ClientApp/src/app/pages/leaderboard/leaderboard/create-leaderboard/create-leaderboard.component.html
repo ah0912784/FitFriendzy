@@ -1,7 +1,9 @@
-<nb-card size ="medium">
-  <nb-card-header>{{ name }}'s Leader Board</nb-card-header>
-  <nb-list>
-    <!-- Add in ngFor to iterate through members and create leader board -->
-    <nb-list-item *ngFor="board of leaderboard">{{board.position}} {{board.name}}  {{board.score}}</nb-list-item>
-  </nb-list>
-</nb-card>
+<nb-list>
+  <nb-list-item *ngFor="let entry of leaderboardEntries;">
+    <nb-user shape="semi-round" [name]="entry?.userName" [title]="entry?.score || '0'">
+    </nb-user>
+    <div class="place-marker">
+      <nb-icon icon="award-outline" status="warning"></nb-icon>{{ entry?.position | ordinalSuffix }} Place
+    </div>
+  </nb-list-item>
+</nb-list>

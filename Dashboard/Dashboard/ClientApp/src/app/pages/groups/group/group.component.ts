@@ -69,12 +69,12 @@ export class GroupComponent implements OnInit, OnDestroy {
   }
 
   loadLeaderboardDetails(groupId: string) {
-    console.log("groupId", groupId);
+    // console.log("groupId", groupId);
     this.leaderboardService.getEntriesByGroupId(groupId).pipe(
       map(leaderboardEntries => leaderboardEntries.slice(0, 15))
     )
       .subscribe((leaderboardEntries) => {
-        console.log(leaderboardEntries);
+        // console.log(leaderboardEntries);
       this.leaderboardEntries = leaderboardEntries;
     },
       err => {
