@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { ActivitiesApi } from '../../@core/backend/common/api/activities.api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'ngx-activities',
   templateUrl: './activities.component.html',

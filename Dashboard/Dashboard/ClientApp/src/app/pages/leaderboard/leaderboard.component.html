@@ -1,10 +1,23 @@
 <!-- Basic layout / ideas -->
 
-<nb-layout>
-  <nb-layout-header>
-    <h3>Leader Boards</h3>
-  </nb-layout-header>
- <ngx-create-leaderboard *ngFor="let leaderboard of leaderboardEntries; let i = index" [group] ="group[i].name" [leaderboard] ="leaderboard">
+  <h3>Leaderboards</h3>
 
- </ngx-create-leaderboard>
-</nb-layout>
+<!-- Use *ngFor to iterate over leaderboardEntries if needed -->
+<!-- *ngFor="let leaderboard of leaderboardEntries; let i=index"
+  *ngFor"let g of groups" -->
+<div class="card-row">
+  <div class="card-col" *ngFor="let g of groups; let i=index">
+    <nb-card [size]="medium">
+      <nb-card-header>{{g.groupName}}</nb-card-header>
+      <nb-card-body>
+        <ngx-create-leaderboard [gId] ="g.groupId" ></ngx-create-leaderboard>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+
+
+
+
+
