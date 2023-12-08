@@ -48,6 +48,22 @@ namespace Dashboard.Controllers
                         context.Entry(membership).State = EntityState.Modified;
                     }
 
+                    // Fetch any current goals that the user has
+                    var currentUnixTimestamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+                    var userGoals = await context.UserGoals
+                        .Where(ug => ug.UserId == activity.UserId && ug.EndTime >= currentUnixTimestamp)
+                        .ToListAsync();
+
+                    foreach (var userGoal in userGoals)
+                    {
+                        if (activity.PointsEarned == null) throw new Exception("Null points earned");
+
+                        userGoal.CurrentPoints += (int)activity.PointsEarned;
+
+                        // Mark the entity as modified to save changes
+                        context.Entry(userGoal).State = EntityState.Modified;
+                    }
+
                     await context.SaveChangesAsync();
 
                     return Ok();
