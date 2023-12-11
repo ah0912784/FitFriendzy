@@ -1,29 +1,34 @@
 <!-- Basic layout / ideas -->
+<!--<nb-layout>
+ <nb-layout-header><h2>Leaderboards</h2></nb-layout-header>-->
+<div class="mt-2">
+  <h2>Leaderboards</h2>
+</div>
 
 
-
-<nb-layout [withScroll] ="false">
- <nb-layout-header><h2>Leaderboards</h2></nb-layout-header>
-  <nb-layout-column *ngFor="let g of groups; let i=index">
+<div class="row">
+  <div class="col-md-4" *ngFor="let g of groups; let i=index">
     <ng-container *ngIf="groups.length > 1; else singleGroup">
-      <nb-card [size]="'large'" class="group-card" [ngClass]="{'col-12': true}">
+      <nb-card [size]="'small'" class="group-card" [ngClass]="{'col-10': true}">
         <nb-card-header>{{ g.groupName }}</nb-card-header>
         <nb-card-body>
           <ngx-create-leaderboard [gId]="g.groupId"></ngx-create-leaderboard>
         </nb-card-body>
       </nb-card>
     </ng-container>
+
     <ng-template #singleGroup>
-      <nb-card [size]="'large'" class="group-card" [ngClass]="{'col-12': true}">
+      <nb-card [size]="'small'" class="group-card" [ngClass]="{'col-10': true}">
         <nb-card-header>{{ g.groupName }}</nb-card-header>
         <nb-card-body>
           <ngx-create-leaderboard [gId]="g.groupId"></ngx-create-leaderboard>
         </nb-card-body>
       </nb-card>
     </ng-template>
-  </nb-layout-column>
-</nb-layout>
-
+    </div>
+    <!--</nb-layout-column>
+    </nb-layout>-->
+</div>
 
 
 
