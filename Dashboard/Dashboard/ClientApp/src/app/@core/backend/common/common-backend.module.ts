@@ -5,10 +5,11 @@ import { UsersApi } from './api/users.api';
 import { HttpService } from './api/http.service';
 import { NbAuthModule } from '@nebular/auth';
 import { SettingsData } from '../../interfaces/common/settings';
+import { ActivityDataService } from './services/activity.service';
 
 // const API = [HttpService, UsersApi];
 
-const SERVICES = [GroupDataService];
+const SERVICES = [GroupDataService, ActivityDataService];
 
 @NgModule({
   imports: [CommonModule, NbAuthModule],

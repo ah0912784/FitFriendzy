@@ -18,4 +18,8 @@ export class ActivitiesApi {
   getActivity(activityId: any): Observable<Activity> {
     return this.http.get(`${this.apiController}/getactivity/${activityId}`);
   }
+
+  getAll(userId: string): Observable<Array<Activity>> {
+    return this.http.get(`${this.apiController}/get/all/${userId}`);
+  }
 }

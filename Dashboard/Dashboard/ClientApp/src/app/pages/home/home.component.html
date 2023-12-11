@@ -13,16 +13,21 @@
   </div>
 
   <div class="col-md">
+
     <div class="col-md">
       <nb-card size="small">
         <nb-card-header>Activity Feed</nb-card-header>
-        <ngx-home-activity></ngx-home-activity>
+        <ngx-activity-feed></ngx-activity-feed>
       </nb-card>
     </div>
-    <nb-card size="small">
-      <nb-card-header>Groups</nb-card-header>
-      <ngx-groups-list [public]="false"></ngx-groups-list>
-    </nb-card>
+
+    <div class="col-md">
+      <nb-card size="small">
+        <nb-card-header>Groups</nb-card-header>
+        <ngx-groups-list [public]="false"></ngx-groups-list>
+      </nb-card>
+    </div>
+
     <div class="col-md">
       <nb-card size="small">
         <nb-card-header>Activity Suggestions For You</nb-card-header>
@@ -30,10 +35,7 @@
           <p>The most time efficent activites are:</p>
           <p>Running (10 Points per hour!)</p>
           <p>Jogging (8 Points per hour!)</p>
-        </nb-card-body>
 
-
-        <nb-card-body>
           The most popular activites are:<br><br>
           <p *ngFor="let items of popular">
             {{ items }}
@@ -43,67 +45,3 @@
     </div>
   </div>
 </div>
-
-<!-- <p>Mockup Below here ----------------------------</p> -->
-<!--
-<h1>
-  Welcome, Jason
-</h1>
-
-<div class="row">
-  <div class="col-md">
-    <nb-card size="small">
-      <nb-card-header>Point Entry</nb-card-header>
-      <nb-card-body>
-        (use NbAutocompleteDirective ?)
-      </nb-card-body>
-    </nb-card>
-    <nb-card size="small">
-      <nb-card-header>Goal Progress</nb-card-header>
-      <nb-card-body>
-        Your progress for October is 50 out of 100 points!
-        <p></p>
-        <nb-progress-bar [value]="50" status="success"></nb-progress-bar>
-      </nb-card-body>
-
-    </nb-card>
-    <nb-card size="small">
-      <nb-card-header>Groups</nb-card-header>
-      <nb-card-body>
-        <nb-card-body>
-          <nb-list-item>
-            MSU Gold Friends - 4th Place
-          </nb-list-item>
-          <nb-list-item>
-            Buddies - 3rd Place
-          </nb-list-item>
-          <nb-list-item>
-            Phi Delta Kappa - 9th Place
-          </nb-list-item>
-        </nb-card-body>
-      </nb-card-body>
-    </nb-card>
-  </div>
-
-  <div class="col-md">
-    <div class="col-md">
-      <nb-card size="small">
-        <nb-card-header>Activity Feed</nb-card-header>
-        <nb-card-body>
-          Running - 60 minutes - 20 Points - 2 Days ago
-        </nb-card-body>
-        <nb-card-body>
-          Running - 45 minutes - 15 Points - 3 Days ago
-        </nb-card-body>
-        <nb-card-body>
-          Weightlifting - 60 minutes - 15 Points - 6 Days ago
-        </nb-card-body>
-      </nb-card>
-    </div>
-    <div class="col-md">
-      <nb-card size="small">
-        <nb-card-header>Recomendations</nb-card-header>
-      </nb-card>
-    </div>
-  </div>
-</div> -->

@@ -30,7 +30,7 @@ export class GroupsListComponent implements OnInit, OnDestroy {
     private router: Router) {
     this.groupAddedSubscription = this.dataService.groupAdded$.subscribe((event) => {
       if (event) {
-        this.updateDataAfterGroupAdded();
+        this.updateData();
       }
     });
   }
@@ -55,10 +55,6 @@ export class GroupsListComponent implements OnInit, OnDestroy {
         });
       }
     });
-  }
-
-  updateDataAfterGroupAdded() {
-    this.updateData();
   }
 
   viewGroup(groupId: string) {

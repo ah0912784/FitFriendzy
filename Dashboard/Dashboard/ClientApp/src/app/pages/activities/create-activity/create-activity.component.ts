@@ -7,6 +7,8 @@ import { UsersApi } from '../../../@core/backend/common/api/users.api';
 import { User } from '../../../@core/interfaces/common/user';
 import { ActivitiesApi } from '../../../@core/backend/common/api/activities.api';
 import { NbToastrService } from '@nebular/theme';
+import { ActivityDataService } from '../../../@core/backend/common/services/activity.service';
+
 
 @Component({
   selector: 'ngx-create-activity',
@@ -48,7 +50,9 @@ export class CreateActivityComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
     private userService: UsersApi,
     private apiService: ActivitiesApi,
-    private toastrService: NbToastrService) { }
+    private toastrService: NbToastrService,
+    private dataService: ActivityDataService
+  ) { }
 
   ngOnInit() {
     this.userService.getCurrent().subscribe((user) => {
@@ -119,10 +123,11 @@ export class CreateActivityComponent implements OnInit, OnDestroy {
     if (this.inputForm.valid) {
       // Do a last update to ensure points are accurate
       this.updatePoints();
-      console.log(`Activity: ${this.inputForm.value.activity}, Duration: ${this.inputForm.value.duration}, Points: ${this.inputForm.value.points}`);
       this.activity = this.toPersistedModel(this.inputForm.value);
+
       this.apiService.addActivity(this.activity).subscribe(() => {
         this.handleSuccessResponse('success');
+        this.dataService.notifyActivityAdded();
       },
       err => {
         this.handleWrongResponse(err);

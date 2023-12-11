@@ -12,37 +12,7 @@ import { UserGoal } from '../../../@core/interfaces/common/userGoal';
 
 @Component({
   selector: 'ngx-home-progress',
-  template: `
-  <nb-card size="small">
-      <nb-card-header>Goal Progress</nb-card-header>
-      <nb-card-body>
-        <p>
-          Your progress for your goal ending {{endDate | date:'longDate'}} is {{points_this_period}} out of {{goal}} points!
-        </p>
-        <nb-progress-bar [value]=point_goal_ratio [displayValue]="true" status="success"></nb-progress-bar>
-    </nb-card-body>
-  </nb-card>
-  
-  <nb-card>
-    <nb-card-header>
-      Select New Goal
-    </nb-card-header>
-    <nb-card-header>
-      Selected range: {{ range.start | date }} - {{ range.end | date }}
-    </nb-card-header>
-    <nb-card-body>
-      <nb-calendar-range [(range)]="range" format="dd.MM.yyyy"></nb-calendar-range>
-    </nb-card-body>
-    <nb-card-body>
-    <form [formGroup]="goalForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="gpoints">Goal Points: </label>
-          <input type="number" placeholder="Points To Earn" formControlName="gpoints" nbInput>
-          <button nbButton class="but" status="primary" type="submit">Set Goal</button>
-        </div>
-    </form>
-    
-  `,
+  templateUrl: './home_progress.component.html',
   styles: [`
     * {
       padding-left: 10px;
@@ -69,16 +39,15 @@ export class HomeProgressComponent implements OnInit, OnDestroy {
     private toastrService: NbToastrService,
     private userService: UsersApi,
     protected dateService: NbDateService<Date>,
-    private apiService: UserGoalsApi,
-    
-    ) {
+    private apiService: UserGoalsApi)
+  {
     this.range = {
       start: this.dateService.addDay(this.monthStart, 3),
       end: this.dateService.addDay(this.monthEnd, -3),
     };
     this.goalForm = this.formBuilder.group({
       gpoints: [null, Validators.required]
-    })
+    });
   }
 
   get monthStart(): Date {
@@ -106,7 +75,7 @@ export class HomeProgressComponent implements OnInit, OnDestroy {
         if (!goal) return;
 
         this.userGoal = goal;
-        
+
         this.updateGoalPerformance(goal);
       });
 

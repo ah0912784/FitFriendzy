@@ -17,6 +17,29 @@ namespace Dashboard.Controllers
             this.log = log;
         }
 
+        // GET api/<ActivitiesController>/get/all
+        [HttpGet]
+        [Route("get/all/{userId}")]
+        public async Task<IActionResult> GetAllUserActivites(Guid userId)
+        {
+            using (var context = new FitFriendzyDatabaseContext())
+            {
+                try
+                {
+                    // retrieve groups based on the group IDs obtained
+                    var activities = await context.UserActivities
+                        .Where(a => a.UserId == userId)
+                        .ToListAsync();
+
+                    return Ok(activities);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Failed to get activities for user - {userId}: {ex}");
+                }
+            }
+        }
+
         // POST api/<ActivitiesController>/add/new
         [HttpPost]
         [Route("add/new")]
